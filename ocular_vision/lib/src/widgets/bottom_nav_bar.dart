@@ -11,7 +11,7 @@ class CustomBottomNav extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           color: greyColor, borderRadius: BorderRadius.circular(40)),
-      margin: EdgeInsets.fromLTRB(35, 0, 35, 20),
+      margin: const EdgeInsets.fromLTRB(35, 0, 35, 20),
       padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
       child: GNav(
         onTabChange: (value) => onTabChange!(value),

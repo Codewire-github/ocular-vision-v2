@@ -1,47 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:ocular_vision/src/common/categories.dart';
 import 'package:ocular_vision/src/widgets/discovery_card.dart';
 
-class Categories {
-  late String title;
-  late String description;
-  late String imgPath;
-  late Color backgroundColor;
-  late Color fontColor;
-  Categories(this.title, this.description, this.imgPath, this.backgroundColor,
-      this.fontColor);
-}
-
-class EdibleCards extends StatelessWidget {
-  const EdibleCards({super.key});
+class CategoriesCardList extends StatelessWidget {
+  const CategoriesCardList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<Categories> categories = [
-      Categories(
-          'Plants',
-          "Plants: the silent poets that whisper life into every corner of our world.",
-          "assets/img/plant.png",
-          const Color.fromARGB(255, 0, 100, 83),
-          Colors.white),
-      Categories(
-          'Food',
-          'Food: the only art you can eat and savor with all your senses.',
-          'assets/img/food.webp',
-          const Color.fromARGB(255, 255, 79, 48),
-          Colors.white),
-      Categories(
-          'Birds',
-          "Birds: Winged wonders, painting the skies with melodies of freedom.",
-          'assets/img/eagle.png',
-          const Color.fromARGB(255, 135, 207, 235),
-          Colors.black),
-    ];
     return ListView(
       padding: const EdgeInsets.all(0),
       scrollDirection: Axis.vertical,
       physics: const BouncingScrollPhysics(),
       children: [
         DiscoveryCard(
+          index: categories[0].index,
           title: categories[0].title,
           description: categories[0].description,
           imgPath: categories[0].imgPath,
@@ -51,6 +23,7 @@ class EdibleCards extends StatelessWidget {
           discoveredItems: 40,
         ),
         DiscoveryCard(
+            index: categories[1].index,
             title: categories[1].title,
             description: categories[1].description,
             backgroundColor: categories[1].backgroundColor,
@@ -59,6 +32,7 @@ class EdibleCards extends StatelessWidget {
             totalItems: 130,
             discoveredItems: 25),
         DiscoveryCard(
+            index: categories[2].index,
             title: categories[2].title,
             description: categories[2].description,
             backgroundColor: categories[2].backgroundColor,
@@ -66,6 +40,24 @@ class EdibleCards extends StatelessWidget {
             imgPath: categories[2].imgPath,
             totalItems: 90,
             discoveredItems: 25),
+        DiscoveryCard(
+            index: categories[3].index,
+            title: categories[3].title,
+            description: categories[3].description,
+            backgroundColor: categories[3].backgroundColor,
+            textColor: categories[3].fontColor,
+            imgPath: categories[3].imgPath,
+            totalItems: 100,
+            discoveredItems: 30),
+        DiscoveryCard(
+            index: categories[4].index,
+            title: categories[4].title,
+            description: categories[4].description,
+            backgroundColor: categories[4].backgroundColor,
+            textColor: categories[4].fontColor,
+            imgPath: categories[4].imgPath,
+            totalItems: 110,
+            discoveredItems: 35),
       ],
     );
   }

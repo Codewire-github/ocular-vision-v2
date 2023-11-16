@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ocular_vision/src/widgets/discovery_card.dart';
-import 'package:ocular_vision/src/widgets/edible_cards.dart';
+import 'package:ocular_vision/src/widgets/categories_card_list.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({super.key});
@@ -28,7 +27,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
             ),
             const SizedBox(height: 15),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 12.5),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10, vertical: 12.5),
               decoration: BoxDecoration(
                 color: Colors.grey[200],
                 borderRadius: BorderRadius.circular(10),
@@ -67,7 +67,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
               ],
             ),
             const SizedBox(height: 20),
-            Expanded(child: EdibleCards())
+            Expanded(child: CategoriesCardList())
           ],
         ),
       ),

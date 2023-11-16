@@ -14,13 +14,13 @@ class CircularProgressBar extends StatelessWidget {
       radius: 30,
       lineWidth: 8,
       percent: progressPercent,
-      progressColor: Colors.black,
+      progressColor: const Color.fromARGB(255, 231, 231, 231),
       center: Text(
         "${(progressPercent * 100).toStringAsFixed(0)}%",
         style: TextStyle(
             fontSize: 13, fontWeight: FontWeight.w800, color: textColor),
       ),
-      backgroundColor: Color.fromARGB(255, 231, 231, 231),
+      backgroundColor: const Color.fromARGB(255, 33, 33, 33),
     );
   }
 }
