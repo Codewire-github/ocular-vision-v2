@@ -1,0 +1,3 @@
+0 chair
+1 sofa
+2 table
