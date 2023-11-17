@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ocular_vision/src/screens/explore_screen.dart';
 import 'package:ocular_vision/src/screens/profile_screen.dart';
 import 'package:ocular_vision/src/widgets/bottom_nav_bar.dart';
+import 'package:ocular_vision/src/screens/camera_screen.dart';
 
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key});
@@ -35,7 +36,9 @@ class _RootScreenState extends State<RootScreen> {
         floatingActionButton: Transform.scale(
           scale: 1.5,
           child: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(CameraScreen());
+            },
             backgroundColor: const Color.fromARGB(255, 62, 8, 255),
             elevation: 4,
             shape: RoundedRectangleBorder(
