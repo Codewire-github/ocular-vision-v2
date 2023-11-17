@@ -30,7 +30,8 @@ class _RootScreenState extends State<RootScreen> {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.white,
+        extendBody: true,
+        backgroundColor: Colors.transparent,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Transform.scale(
           scale: 1.5,

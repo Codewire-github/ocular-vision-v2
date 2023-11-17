@@ -42,6 +42,13 @@ List<Categories> categories = [
       Colors.black),
   Categories(
       4,
+      'Furniture',
+      'Furniture: Fusion of form and function, weaving comfort and style into the fabric of your home.',
+      'assets/img/sofa.png',
+      const Color.fromARGB(255, 210, 180, 140),
+      Colors.black),
+  Categories(
+      5,
       'Birds',
       "Birds: Winged wonders, painting the skies with melodies of freedom.",
       'assets/img/eagle.png',
