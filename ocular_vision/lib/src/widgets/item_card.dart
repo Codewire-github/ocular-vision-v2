@@ -21,9 +21,19 @@ class ItemCard extends StatelessWidget {
     final lightBackgroundColor = generateRandomLightColor();
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      margin: EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
-          color: lightBackgroundColor, borderRadius: BorderRadius.circular(15)),
+        color: lightBackgroundColor,
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey[300]!, // Light shadow color
+            offset: Offset(4, 4), // Shadow position (horizontal, vertical)
+            blurRadius: 8, // Spread of the shadow
+            spreadRadius: 2, // Expands the shadow
+          ),
+        ],
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -32,8 +42,8 @@ class ItemCard extends StatelessWidget {
             child: Image.network(
               "https://www.plantshop.me/media/product/Philodendron_Atom_-_plantshopme.jpg",
               fit: BoxFit.cover,
-              width: 80,
-              height: 80,
+              width: 75,
+              height: 75,
             ),
           ),
           const SizedBox(width: 15),
@@ -47,11 +57,18 @@ class ItemCard extends StatelessWidget {
               const SizedBox(height: 7),
               Row(
                 children: [
-                  Icon(Icons.history_rounded),
+                  Icon(
+                    Icons.history_rounded,
+                    color: Colors.grey[800],
+                    size: 20,
+                  ),
                   SizedBox(width: 6),
                   Text(
                     "15 Nov, 2023",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.grey[800]),
                   ),
                 ],
               ),

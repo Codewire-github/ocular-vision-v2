@@ -8,9 +8,9 @@ class CategoriesCardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.all(0),
+      padding: const EdgeInsets.only(bottom: 50),
       scrollDirection: Axis.vertical,
-      physics: const BouncingScrollPhysics(),
+      physics: const ClampingScrollPhysics().parent,
       children: [
         DiscoveryCard(
           index: categories[0].index,
@@ -56,6 +56,15 @@ class CategoriesCardList extends StatelessWidget {
             backgroundColor: categories[4].backgroundColor,
             textColor: categories[4].fontColor,
             imgPath: categories[4].imgPath,
+            totalItems: 110,
+            discoveredItems: 35),
+        DiscoveryCard(
+            index: categories[5].index,
+            title: categories[5].title,
+            description: categories[5].description,
+            backgroundColor: categories[5].backgroundColor,
+            textColor: categories[5].fontColor,
+            imgPath: categories[5].imgPath,
             totalItems: 110,
             discoveredItems: 35),
       ],

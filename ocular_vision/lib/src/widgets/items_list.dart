@@ -8,7 +8,7 @@ class ItemList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
         constraints: const BoxConstraints(
           minHeight: 300,
         ),

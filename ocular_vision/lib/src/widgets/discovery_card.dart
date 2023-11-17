@@ -36,7 +36,17 @@ class DiscoveryCard extends StatelessWidget {
         padding: const EdgeInsets.all(15),
         margin: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
-            color: backgroundColor, borderRadius: BorderRadius.circular(15)),
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey[300]!, // Light shadow color
+              offset: Offset(3, 3), // Shadow position (horizontal, vertical)
+              blurRadius: 5, // Spread of the shadow
+              spreadRadius: 2, // Expands the shadow
+            ),
+          ],
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
