@@ -49,6 +49,13 @@ List<Categories> categories = [
       Colors.black),
   Categories(
       5,
+      'Flowers',
+      'Flowers: Nature’s way of expressing joy, each petal a brushstroke in the masterpiece of life.',
+      'assets/img/flower.png',
+      const Color.fromARGB(255, 230, 230, 250),
+      Colors.black),
+  Categories(
+      6,
       'Birds',
       "Birds: Winged wonders, painting the skies with melodies of freedom.",
       'assets/img/eagle.png',

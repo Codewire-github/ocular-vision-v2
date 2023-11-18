@@ -41,6 +41,7 @@ dependencies:
   percent_indicator: ^4.2.3
   get: ^4.1.4
   camera: ^0.10.5+5
+  image_picker: ^1.0.4
 
 dev_dependencies:
   flutter_test:

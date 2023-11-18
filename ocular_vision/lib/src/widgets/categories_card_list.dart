@@ -67,6 +67,15 @@ class CategoriesCardList extends StatelessWidget {
             imgPath: categories[5].imgPath,
             totalItems: 110,
             discoveredItems: 35),
+        DiscoveryCard(
+            index: categories[6].index,
+            title: categories[6].title,
+            description: categories[6].description,
+            backgroundColor: categories[6].backgroundColor,
+            textColor: categories[6].fontColor,
+            imgPath: categories[6].imgPath,
+            totalItems: 140,
+            discoveredItems: 45),
       ],
     );
   }
