@@ -22,6 +22,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
               "Explore the world around you.",
               style: TextStyle(
                 fontSize: 38,
+                fontFamily: "Poppins",
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -43,7 +44,11 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   const SizedBox(width: 10),
                   Text(
                     "Search the objects you have discovered",
-                    style: TextStyle(color: Colors.grey[700], fontSize: 14),
+                    style: TextStyle(
+                        color: Colors.grey[700],
+                        fontSize: 14,
+                        fontFamily: "Poppins",
+                        fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
@@ -61,6 +66,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   "Discover",
                   style: TextStyle(
                     fontSize: 30,
+                    fontFamily: "Poppins",
                     fontWeight: FontWeight.bold,
                   ),
                 ),

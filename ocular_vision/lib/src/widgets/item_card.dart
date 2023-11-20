@@ -52,7 +52,11 @@ class ItemCard extends StatelessWidget {
             children: [
               Text(
                 "Philodendenron Atom",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: "Poppins",
+                ),
               ),
               const SizedBox(height: 7),
               Row(
@@ -68,6 +72,7 @@ class ItemCard extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
+                        fontFamily: "Poppins",
                         color: Colors.grey[800]),
                   ),
                 ],

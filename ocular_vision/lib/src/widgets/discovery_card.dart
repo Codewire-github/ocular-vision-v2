@@ -31,8 +31,8 @@ class DiscoveryCard extends StatelessWidget {
         Get.to(const CategoriesListScreen(), arguments: index);
       },
       child: Container(
-        width: 300,
-        height: 215,
+        width: double.infinity,
+        height: 230,
         padding: const EdgeInsets.all(15),
         margin: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
@@ -62,6 +62,7 @@ class DiscoveryCard extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 22.5,
                           fontWeight: FontWeight.w700,
+                          fontFamily: "Poppins",
                           color: textColor),
                     ),
                     const SizedBox(height: 5),
@@ -71,6 +72,7 @@ class DiscoveryCard extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 14.5,
                               fontWeight: FontWeight.w500,
+                              fontFamily: "Poppins",
                               color: textColor)),
                     ),
                   ],
@@ -82,7 +84,7 @@ class DiscoveryCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -94,6 +96,7 @@ class DiscoveryCard extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w800,
+                          fontFamily: "Poppins",
                           color: textColor),
                     ),
                     const SizedBox(height: 5),
@@ -111,11 +114,13 @@ class DiscoveryCard extends StatelessWidget {
                             style: const TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.w600,
+                                fontFamily: "Poppins",
                                 color: Colors.white),
                           ),
                           const Text("  items",
                               style: TextStyle(
                                   fontWeight: FontWeight.w800,
+                                  fontFamily: "Poppins",
                                   fontSize: 17,
                                   color: Colors.white))
                         ],

@@ -22,7 +22,10 @@ class ItemList extends StatelessWidget {
             const SizedBox(height: 10),
             const Text(
               "Your discoveries:",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: "Poppins"),
             ),
             const SizedBox(height: 20),
             Column(

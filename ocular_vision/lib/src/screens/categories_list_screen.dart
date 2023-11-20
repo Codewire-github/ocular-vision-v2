@@ -82,15 +82,19 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
                                 children: [
                                   Text(title,
                                       style: TextStyle(
-                                          color: fontColor,
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.w800)),
+                                        color: fontColor,
+                                        fontSize: 33,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: "Poppins",
+                                      )),
                                   const SizedBox(height: 10),
                                   Text(description,
                                       style: TextStyle(
-                                          color: fontColor,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500)),
+                                        color: fontColor,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: "Poppins",
+                                      )),
                                 ],
                               ),
                             ),
@@ -112,9 +116,11 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
                                 Text(
                                   "Achievement:",
                                   style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w800,
-                                      color: fontColor),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w800,
+                                    color: fontColor,
+                                    fontFamily: "Poppins",
+                                  ),
                                 ),
                                 const SizedBox(height: 5),
                                 Container(
@@ -129,15 +135,19 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
                                       Text(
                                         "$discoveredItems / $totalItems",
                                         style: const TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.white),
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white,
+                                          fontFamily: "Poppins",
+                                        ),
                                       ),
                                       const Text("  items",
                                           style: TextStyle(
-                                              fontWeight: FontWeight.w800,
-                                              fontSize: 18,
-                                              color: Colors.white))
+                                            fontWeight: FontWeight.w800,
+                                            fontSize: 18,
+                                            color: Colors.white,
+                                            fontFamily: "Poppins",
+                                          ))
                                     ],
                                   ),
                                 )
