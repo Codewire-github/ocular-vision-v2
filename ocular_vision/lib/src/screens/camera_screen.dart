@@ -16,7 +16,7 @@ class CameraScreen extends StatefulWidget {
 
 class _CameraScreenState extends State<CameraScreen> {
   CameraController? _controller;
-  late Future<void>? _initializeControllerFuture;
+
   File? _image;
   bool isFlashOn = false;
 
@@ -26,6 +26,7 @@ class _CameraScreenState extends State<CameraScreen> {
     'Foods',
     'Technology',
     'Furniture',
+    'Flowers',
     'Birds'
   ];
   int selectedOption = 2;
@@ -147,7 +148,7 @@ class _CameraScreenState extends State<CameraScreen> {
                       onPressed: () => {Get.back()},
                       icon: Icon(
                         Icons.arrow_back_ios_new,
-                        size: 30,
+                        size: 25,
                         color: Colors.white,
                       ),
                     ),
@@ -170,7 +171,7 @@ class _CameraScreenState extends State<CameraScreen> {
                       },
                       icon: Icon(
                         Icons.flash_on,
-                        size: 30,
+                        size: 25,
                         color: isFlashOn ? Colors.orange : Colors.grey[400],
                       ),
                     ),
@@ -190,15 +191,16 @@ class _CameraScreenState extends State<CameraScreen> {
                     child: IconButton(
                       onPressed: () async {
                         await _getImage(ImageSource.gallery);
-
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => InfoScreen(
-                                    option: selectedOption,
-                                    photo: _image!,
-                                  )),
-                        );
+                        if (_image != null) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) => InfoScreen(
+                                      option: selectedOption,
+                                      photo: _image!,
+                                    )),
+                          );
+                        }
                       },
                       icon: Icon(
                         Icons.photo_library,
@@ -287,8 +289,9 @@ class _CameraScreenState extends State<CameraScreen> {
                                       color: isSelected
                                           ? Colors.black
                                           : Colors.grey[200],
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 17)),
+                                      fontWeight: FontWeight.w600,
+                                      fontFamily: "Poppins",
+                                      fontSize: 16)),
                             ),
                           );
                         }),
