@@ -6,7 +6,7 @@ import 'package:ocular_vision/src/widgets/bottom_nav_bar.dart';
 import 'package:ocular_vision/src/screens/camera_screen.dart';
 
 class RootScreen extends StatefulWidget {
-  const RootScreen({super.key});
+  const RootScreen({Key? key});
 
   @override
   State<RootScreen> createState() => _RootScreenState();
@@ -38,23 +38,24 @@ class _RootScreenState extends State<RootScreen> {
           scale: 1.5,
           child: FloatingActionButton(
             onPressed: () {
-              Get.to(CameraScreen());
+              Get.to(CameraScreen(email: "patluPrasad@yahoo.com"));
             },
             backgroundColor: const Color.fromARGB(255, 62, 8, 255),
             elevation: 4,
             shape: RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.circular(50.0), // Set your desired border radius
+              borderRadius: BorderRadius.circular(50.0),
               side: const BorderSide(
-                  color: Colors.black,
-                  width: 5.0), // Set your desired border color and width
+                color: Colors.black,
+                width: 5.0,
+              ),
             ),
             child: const Icon(Icons.document_scanner_rounded,
                 size: 25, color: Colors.white),
           ),
         ),
-        bottomNavigationBar:
-            CustomBottomNav(onTabChange: (index) => navigateBottomBar(index)),
+        bottomNavigationBar: CustomBottomNav(
+          onTabChange: (index) => navigateBottomBar(index),
+        ),
         body: screens[selectedIndex],
       ),
     );
