@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ocular_vision/src/screens/explore_screen.dart';
+import 'package:ocular_vision/src/screens/info_screen.dart';
 import 'package:ocular_vision/src/screens/profile_screen.dart';
 import 'package:ocular_vision/src/widgets/bottom_nav_bar.dart';
 import 'package:ocular_vision/src/screens/camera_screen.dart';
@@ -40,7 +41,7 @@ class _RootScreenState extends State<RootScreen> {
             onPressed: () {
               Get.to(CameraScreen());
             },
-            backgroundColor: const Color.fromARGB(255, 62, 8, 255),
+            backgroundColor: const Color.fromARGB(255, 195, 226, 84),
             elevation: 4,
             shape: RoundedRectangleBorder(
               borderRadius:

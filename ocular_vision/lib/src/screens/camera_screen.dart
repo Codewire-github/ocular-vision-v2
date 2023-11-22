@@ -39,11 +39,11 @@ class _CameraScreenState extends State<CameraScreen> {
 
   @override
   void initState() {
-    //_initializeCamera();
+    super.initState();
+    _initializeCamera();
     setState(() {
       _image = null;
     });
-    super.initState();
   }
 
   Future<void> _takePicture() async {
@@ -57,13 +57,13 @@ class _CameraScreenState extends State<CameraScreen> {
       //Save the taken picture to a temporary file
       File(imagePath).writeAsBytesSync(File(image.path).readAsBytesSync());
 
-      _updateImage(File(imagePath));
+      await _updateImage(File(imagePath));
     } catch (e) {
       print('Error: $e');
     }
   }
 
-  void _updateImage(File imageFile) {
+  Future<void> _updateImage(File imageFile) async {
     setState(() {
       _image = imageFile;
     });
@@ -86,6 +86,7 @@ class _CameraScreenState extends State<CameraScreen> {
     final firstCamera = cameras.first;
 
     _controller = CameraController(firstCamera, ResolutionPreset.medium);
+
     // Next, initialize the controller. This returns a Future.
     try {
       await _controller!.initialize().then((_) {
@@ -124,15 +125,15 @@ class _CameraScreenState extends State<CameraScreen> {
       body: Stack(children: [
         Stack(
           children: [
-            // Container(
-            //     height: double.infinity,
-            //     width: double.infinity,
-            //     margin: EdgeInsets.only(bottom: 90),
-            //     child: _controller!.value.isInitialized
-            //         ? CameraPreview(_controller!)
-            //         : const Center(
-            //             child: CircularProgressIndicator(),
-            //           )),
+            Container(
+                height: double.infinity,
+                width: double.infinity,
+                margin: EdgeInsets.only(bottom: 90),
+                child: _controller!.value.isInitialized
+                    ? CameraPreview(_controller!)
+                    : const Center(
+                        child: CircularProgressIndicator(),
+                      )),
             Align(
               alignment: Alignment.topLeft,
               child: Padding(
@@ -146,7 +147,7 @@ class _CameraScreenState extends State<CameraScreen> {
                     ),
                     child: IconButton(
                       onPressed: () => {Get.back()},
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back_ios_new,
                         size: 25,
                         color: Colors.white,
