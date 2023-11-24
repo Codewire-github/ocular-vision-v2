@@ -14,7 +14,16 @@ Color generateRandomLightColor() {
 }
 
 class ItemCard extends StatelessWidget {
-  const ItemCard({super.key});
+  final String imageName;
+  final String date;
+  final String image;
+
+  const ItemCard({
+    Key? key,
+    required this.imageName,
+    required this.date,
+    required this.image
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +49,7 @@ class ItemCard extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.network(
-              "https://www.plantshop.me/media/product/Philodendron_Atom_-_plantshopme.jpg",
+              image,
               fit: BoxFit.cover,
               width: 75,
               height: 75,
@@ -51,7 +60,7 @@ class ItemCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Philodendenron Atom",
+                imageName,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -68,7 +77,7 @@ class ItemCard extends StatelessWidget {
                   ),
                   SizedBox(width: 6),
                   Text(
-                    "15 Nov, 2023",
+                    date,
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,

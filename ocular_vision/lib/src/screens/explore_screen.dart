@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ocular_vision/src/widgets/categories_card_list.dart';
 
 class ExploreScreen extends StatefulWidget {
-  const ExploreScreen({super.key});
+  final dynamic responseData;
+
+  ExploreScreen({Key? key, required this.responseData}) : super(key: key);
 
   @override
   State<ExploreScreen> createState() => _ExploreScreenState();
@@ -11,6 +13,8 @@ class ExploreScreen extends StatefulWidget {
 class _ExploreScreenState extends State<ExploreScreen> {
   @override
   Widget build(BuildContext context) {
+    print("ExploreScreen responseData: ${widget.responseData}");
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -73,7 +77,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
               ],
             ),
             const SizedBox(height: 20),
-            Expanded(child: CategoriesCardList())
+            Expanded(child: CategoriesCardList(responseData: widget.responseData))
           ],
         ),
       ),

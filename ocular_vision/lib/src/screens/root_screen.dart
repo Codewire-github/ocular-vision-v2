@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:ocular_vision/src/screens/explore_screen.dart';
 import 'package:ocular_vision/src/screens/profile_screen.dart';
 import 'package:ocular_vision/src/widgets/bottom_nav_bar.dart';
@@ -13,7 +15,15 @@ class RootScreen extends StatefulWidget {
 }
 
 class _RootScreenState extends State<RootScreen> {
+  dynamic responseData; // Hold the response data
   int selectedIndex = 0;
+  String userEmail = "patluPrasad@yahoo.com"; // Variable accessible throughout the screen
+
+  @override
+  void initState() {
+    super.initState();
+    getUserData(userEmail);
+  }
 
   void navigateBottomBar(int index) {
     setState(() {
@@ -21,9 +31,9 @@ class _RootScreenState extends State<RootScreen> {
     });
   }
 
-  List<Widget> screens = const [
-    ExploreScreen(),
-    ProfileScreen(),
+  List<Widget> screens() => [
+        ExploreScreen(responseData: responseData), 
+        ProfileScreen(responseData: responseData), 
   ];
 
   @override
@@ -38,7 +48,7 @@ class _RootScreenState extends State<RootScreen> {
           scale: 1.5,
           child: FloatingActionButton(
             onPressed: () {
-              Get.to(CameraScreen(email: "patluPrasad@yahoo.com"));
+              Get.to(CameraScreen(email: userEmail));
             },
             backgroundColor: const Color.fromARGB(255, 62, 8, 255),
             elevation: 4,
@@ -56,8 +66,32 @@ class _RootScreenState extends State<RootScreen> {
         bottomNavigationBar: CustomBottomNav(
           onTabChange: (index) => navigateBottomBar(index),
         ),
-        body: screens[selectedIndex],
+        body: screens()[selectedIndex],
       ),
     );
   }
+
+  Future<void> getUserData(String userEmail) async {
+  final String apiUrl = "http://192.168.1.87:8080/api/ocular"; 
+  final response = await http.get(Uri.parse('$apiUrl?userName=$userEmail'));
+
+  if (response.statusCode == 200) {
+    setState(() {
+      // Store the pretty-printed JSON in responseData
+      responseData = _prettyPrint(json.decode(response.body));
+    });
+
+    // Print the formatted JSON string
+    print("User data received:\n${responseData}");
+  } else {
+    print("Failed to load user data. Status code: ${response.statusCode}");
+  } 
+}
+
+// Function to pretty print JSON
+String _prettyPrint(dynamic json) {
+  JsonEncoder encoder = JsonEncoder.withIndent('  ');
+  return encoder.convert(json);
+}
+
 }
