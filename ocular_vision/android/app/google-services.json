@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1077723360427",
+    "project_id": "ocularvision-140d0",
+    "storage_bucket": "ocularvision-140d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1077723360427:android:d44b9f11746916f7915bee",
+        "android_client_info": {
+          "package_name": "com.example.ocular_vision"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1077723360427-70jopiq9vlal46ecek8adij5r5cddeat.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7JCC3dK5HzRyWamh6K_-nrfcUup3c2Cg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1077723360427-70jopiq9vlal46ecek8adij5r5cddeat.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
