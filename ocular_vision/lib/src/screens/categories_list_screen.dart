@@ -12,31 +12,41 @@ class CategoriesListScreen extends StatefulWidget {
 }
 
 class _CategoriesListScreenState extends State<CategoriesListScreen> {
-  final int index = Get.arguments;
+  late int index = 0;
+  late int discoveredItems = 0;
+  late dynamic responseData;
   String title = "";
   String description = "";
   String imgPath = "";
   int totalItems = 0;
-  int discoveredItems = 0;
   Color backgroundColor = Colors.white;
   Color fontColor = Colors.black;
+
+  @override
+  void initState() {
+    super.initState();
+    try {
+      Map<String, dynamic> arguments = Get.arguments;
+      if (arguments != null) {
+        index = arguments['index'] ?? 0;
+        discoveredItems = arguments['discoveredItems'] ?? 0;
+        responseData = arguments['responseData'];
+      }
+      loadData();
+    } catch (error) {
+      print('Error in initState: $error');
+    }
+  }
 
   void loadData() {
     setState(() {
       title = categories[index].title;
       description = categories[index].description;
       imgPath = categories[index].imgPath;
-      totalItems = 120;
-      discoveredItems = 30;
+      totalItems = categories[index].totalItems;
       backgroundColor = categories[index].backgroundColor;
       fontColor = categories[index].fontColor;
     });
-  }
-
-  @override
-  void initState() {
-    loadData();
-    super.initState();
   }
 
   @override
@@ -161,7 +171,7 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
                       ],
                     )),
                 const SizedBox(height: 30),
-                ItemList(),
+                ItemList(responseData: responseData, category: title),
               ],
             ),
           ),
