@@ -6,17 +6,13 @@ import 'package:ocular_vision/src/screens/explore_screen.dart';
 import 'package:ocular_vision/src/screens/auth_screen.dart';
 import 'package:ocular_vision/src/widgets/bottom_nav_bar.dart';
 import 'package:ocular_vision/src/screens/camera_screen.dart';
+import 'package:ocular_vision/src/screens/profile_screen.dart';
 
 class RootScreen extends StatefulWidget {
-  final String userName;
-  final String email;
-  final String userImage;
+
 
   const RootScreen({
     Key? key,
-    required this.userName,
-    required this.email,
-    required this.userImage,
   }) : super(key: key);
 
   @override
@@ -46,11 +42,12 @@ class _RootScreenState extends State<RootScreen> {
           responseData: responseData,
         ),
         AuthScreen(),
+        ProfileScreen(
+        ),  
       ];
 
   Widget build(BuildContext context) {
-    print("username: ${widget.userName}");
-  if (responseData != null) {
+  if (responseData == null) {
     // Display an error message or perform any other actions for error handling
   return GetMaterialApp(
   debugShowCheckedModeBanner: false,
