@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:ocular_vision/src/screens/explore_screen.dart';
-import 'package:ocular_vision/src/screens/profile_screen.dart';
+import 'package:ocular_vision/src/screens/auth_screen.dart';
 import 'package:ocular_vision/src/widgets/bottom_nav_bar.dart';
 import 'package:ocular_vision/src/screens/camera_screen.dart';
 
@@ -26,7 +26,8 @@ class RootScreen extends StatefulWidget {
 class _RootScreenState extends State<RootScreen> {
   dynamic responseData; // Hold the response data
   int selectedIndex = 0;
-  String userEmail = "patluPrasad@yahoo.com"; // Variable accessible throughout the screen
+  String userEmail =
+      "patluPrasad@yahoo.com"; // Variable accessible throughout the screen
 
   @override
   void initState() {
@@ -41,9 +42,11 @@ class _RootScreenState extends State<RootScreen> {
   }
 
   List<Widget> screens() => [
-        ExploreScreen(responseData: responseData), 
-        ProfileScreen(responseData: responseData), 
-  ];
+        ExploreScreen(
+          responseData: responseData,
+        ),
+        AuthScreen(),
+      ];
 
   Widget build(BuildContext context) {
     print("username: ${widget.userName}");
@@ -134,26 +137,25 @@ class _RootScreenState extends State<RootScreen> {
 
 
   Future<void> getUserData(String userEmail) async {
-  final String apiUrl = "http://192.168.1.87:8080/api/ocular"; 
-  final response = await http.get(Uri.parse('$apiUrl?userName=$userEmail'));
+    final String apiUrl = "http://192.168.1.87:8080/api/ocular";
+    final response = await http.get(Uri.parse('$apiUrl?userName=$userEmail'));
 
-  if (response.statusCode == 200) {
-    setState(() {
-      // Store the pretty-printed JSON in responseData
-      responseData = _prettyPrint(json.decode(response.body));
-    });
+    if (response.statusCode == 200) {
+      setState(() {
+        // Store the pretty-printed JSON in responseData
+        responseData = _prettyPrint(json.decode(response.body));
+      });
 
-    // Print the formatted JSON string
-    print("User data received:\n${responseData}");
-  } else {
-    print("Failed to load user data. Status code: ${response.statusCode}");
-  } 
-}
+      // Print the formatted JSON string
+      print("User data received:\n${responseData}");
+    } else {
+      print("Failed to load user data. Status code: ${response.statusCode}");
+    }
+  }
 
 // Function to pretty print JSON
-String _prettyPrint(dynamic json) {
-  JsonEncoder encoder = JsonEncoder.withIndent('  ');
-  return encoder.convert(json);
-}
-
+  String _prettyPrint(dynamic json) {
+    JsonEncoder encoder = JsonEncoder.withIndent('  ');
+    return encoder.convert(json);
+  }
 }

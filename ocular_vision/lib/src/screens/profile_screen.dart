@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:ocular_vision/src/common/color_constants.dart';
 import 'package:ocular_vision/src/widgets/item_card.dart';
+=======
+import 'package:ocular_vision/src/screens/google_sign_in.dart';
+import 'package:provider/provider.dart';
+>>>>>>> 14c95990dd0299ea1741bb63192d8e49754436c1
 
 class ProfileScreen extends StatefulWidget {
-  final dynamic responseData;
-
-  ProfileScreen({Key? key, required this.responseData}) : super(key: key);
+  ProfileScreen({Key? key}) : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -14,6 +17,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     print("ProfileScreen responseData: ${widget.responseData}");
 
     double screenWidth = MediaQuery.of(context).size.width;
@@ -152,5 +156,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
     );
+=======
+    return Scaffold(
+        backgroundColor: Colors.red,
+        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          ElevatedButton(
+            child: Text('Sign Up with Google'),
+            onPressed: () {
+              final provider =
+                  Provider.of<GoogleSignInProvider>(context, listen: false);
+              provider.googleLogin();
+            },
+          ),
+        ]));
+>>>>>>> 14c95990dd0299ea1741bb63192d8e49754436c1
   }
 }
