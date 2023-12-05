@@ -10,25 +10,44 @@ class CategoriesCardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("CategoriesCardList responseData: $responseData");
-    List<dynamic> decodedResponseData = jsonDecode(responseData);
-    return ListView(
-      padding: const EdgeInsets.only(bottom: 50),
-      scrollDirection: Axis.vertical,
-      physics: const ClampingScrollPhysics().parent,
-      children: [
-        DiscoveryCard(
-          index: categories[4].index,
-          title: categories[4].title,
-          description: categories[4].description,
-          backgroundColor: categories[4].backgroundColor,
-          textColor: categories[4].fontColor,
-          imgPath: categories[4].imgPath,
-          totalItems: categories[4].totalItems,
-          discoveredItems: getUniqueImageNamesCount(decodedResponseData, categories[4].title, categories[4].totalItems),
-          responseData: responseData, 
-        )
-      ],
-    );
+
+    List<dynamic> decodedResponseData = [];
+    if (responseData != null) {
+      try {
+        decodedResponseData = jsonDecode(responseData);
+      } catch (e) {
+        print("Error decoding responseData: $e");
+        // Handle the decoding error, if any
+      }
+    }
+
+    if (categories != null && categories.length > 4) {
+      return ListView(
+        padding: const EdgeInsets.only(bottom: 50),
+        scrollDirection: Axis.vertical,
+        physics: const ClampingScrollPhysics().parent,
+        children: [
+          DiscoveryCard(
+            index: categories[4].index,
+            title: categories[4].title,
+            description: categories[4].description,
+            backgroundColor: categories[4].backgroundColor,
+            textColor: categories[4].fontColor,
+            imgPath: categories[4].imgPath,
+            totalItems: categories[4].totalItems,
+            discoveredItems: responseData == null
+                ? 0
+                : getUniqueImageNamesCount(decodedResponseData, categories[4].title, categories[4].totalItems),
+            responseData: responseData,
+          ),
+        ],
+      );
+    } else {
+      // Handle the case where categories is null or doesn't have an element at index 4
+      return Center(
+        child: Text("Invalid categories data"),
+      );
+    }
   }
 
   int getUniqueImageNamesCount(dynamic responseData, String categoryTitle, int totalItems) {
@@ -49,7 +68,7 @@ class CategoriesCardList extends StatelessWidget {
             count++;
 
             if (count >= totalItems) {
-              return count; 
+              return count;
             }
           }
         }
@@ -60,3 +79,4 @@ class CategoriesCardList extends StatelessWidget {
     return count;
   }
 }
+

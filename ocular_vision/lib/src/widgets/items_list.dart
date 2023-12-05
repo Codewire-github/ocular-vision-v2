@@ -20,7 +20,7 @@ class ItemList extends StatelessWidget {
 
     try {
       // Decode the responseData
-      List<dynamic> decodedResponseData = jsonDecode(responseData);
+      List<dynamic> decodedResponseData = responseData != null ? jsonDecode(responseData) : [];
 
       if (decodedResponseData is List) {
         for (var entry in decodedResponseData) {
@@ -34,7 +34,7 @@ class ItemList extends StatelessWidget {
                     .where((item) => item['category'] == category)
                     .toList();
             
-            //sort in ascendinf order
+            // Sort in descending order
             categoryItems.sort((a, b) => b['date'].compareTo(a['date']));
             items.addAll(categoryItems.take(5));
           }
@@ -69,15 +69,24 @@ class ItemList extends StatelessWidget {
             const SizedBox(height: 20),
             Column(
               children: [
-                // Display the recent 5 items
-                for (var item in items)
-                  ItemCard(
-                    imageName: item['imageName'],
-                    date: item['date'],
-                    image: item['image'],
+                // Display the recent 5 items or a message if no items are available
+                if (items.isNotEmpty)
+                  for (var item in items)
+                    ItemCard(
+                      imageName: item['imageName'],
+                      date: item['date'],
+                      image: item['image'],
+                    )
+                else
+                  const Text(
+                    "Try discovering new items and check back here.",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: "Poppins",
+                    ),
                   ),
               ],
-              )
+            )
           ],
         ),
       ),
