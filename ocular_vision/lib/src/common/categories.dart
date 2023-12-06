@@ -45,7 +45,7 @@ List<Categories> categories = [
   Categories(
     3,
     'Technology',
-    "The seamless fusion of knowledge and innovation, shaping a future where possibilities are limitless.",
+    "The seamless fusion of knowledge and innovation, shaping the future.",
     'assets/img/laptop.png',
     Color.fromARGB(255, 0, 227, 167),
     Colors.black,

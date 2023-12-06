@@ -9,10 +9,15 @@ import 'package:ocular_vision/src/screens/camera_screen.dart';
 import 'package:ocular_vision/src/screens/profile_screen.dart';
 
 class RootScreen extends StatefulWidget {
-
+  final String userName;
+  final String userImage;
+  final String email;
 
   const RootScreen({
     Key? key,
+    required this.userName,
+    required this.userImage,
+    required this.email,
   }) : super(key: key);
 
   @override
@@ -41,9 +46,12 @@ class _RootScreenState extends State<RootScreen> {
         ExploreScreen(
           responseData: responseData,
         ),
-        AuthScreen(),
         ProfileScreen(
+          responseData: responseData,
+          userName: widget.userName,
+          userImage: widget.userImage
         ),  
+        //AuthScreen()
       ];
 
   Widget build(BuildContext context) {
@@ -70,7 +78,7 @@ class _RootScreenState extends State<RootScreen> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                getUserData(userEmail);
+                getUserData(widget.email);
               },
               style: ElevatedButton.styleFrom(
                 primary: Colors.grey[700], // Set the button background color to white
@@ -108,7 +116,7 @@ class _RootScreenState extends State<RootScreen> {
           scale: 1.5,
           child: FloatingActionButton(
             onPressed: () {
-              Get.to(CameraScreen(email: userEmail));
+              Get.to(CameraScreen(email: widget.email));
             },
             backgroundColor: const Color.fromARGB(255, 62, 8, 255),
             elevation: 4,

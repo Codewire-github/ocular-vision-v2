@@ -1,20 +1,75 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:ocular_vision/src/common/color_constants.dart';
 import 'package:ocular_vision/src/widgets/item_card.dart';
 
 class ProfileScreen extends StatefulWidget {
+  final dynamic responseData;
+  final String userName;
+  final String userImage;
 
-  ProfileScreen({  
-    Key? key}) : super(key: key);
+  ProfileScreen({
+    Key? key,
+    required this.responseData,
+    required this.userName,
+    required this.userImage,
+  }) : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  List<Map<String, dynamic>> savedImages = [];
+  int totalDiscoveries = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    try {
+      // Decode the responseData
+      List<dynamic> decodedResponseData =
+          widget.responseData != null ? jsonDecode(widget.responseData) : [];
+
+      if (decodedResponseData is List) {
+        for (var entry in decodedResponseData) {
+          if (entry is Map &&
+              entry['imageData'] is List &&
+              entry['imageData'].isNotEmpty) {
+            // Ensure that entry['imageData'] is List<Map<String, dynamic>>
+            List<Map<String, dynamic>> categoryItems =
+                List<Map<String, dynamic>>.from(entry['imageData'])
+                    .where((item) => item['saved'] == true)
+                    .toList();
+
+            // Sort in descending order
+            categoryItems.sort((a, b) => b['date'].compareTo(a['date']));
+            savedImages.addAll(categoryItems);
+          }
+          totalDiscoveries = countTotalObjects(decodedResponseData);
+        }
+      }
+    } catch (error) {
+      print('Error decoding responseData: $error');
+    }
+  }
+
+  int countTotalObjects(List<dynamic> responseData) {
+  int totalCount = 0;
+
+  for (var entry in responseData) {
+    if (entry is Map &&
+        entry['imageData'] is List &&
+        entry['imageData'].isNotEmpty) {
+      totalCount += (entry['imageData'] as List).length;
+    }
+  }
+
+  return totalCount;
+  }
+
   @override
   Widget build(BuildContext context) {
-
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -30,17 +85,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
-                      SizedBox(height: 60), // Added gap at the top
+                      SizedBox(height: 60),
                       CircleAvatar(
                         radius: 60,
-                        backgroundImage: NetworkImage("https://via.placeholder.com/100x100"),
+                        backgroundImage: NetworkImage(widget.userImage),
                       ),
                       SizedBox(height: 20),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            'Patlu Prasad',
+                            widget.userName,
                             style: TextStyle(
                               color: Color(0xFF171717),
                               fontSize: 42,
@@ -54,13 +109,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Icon(
                                 Icons.search,
                                 color: Colors.black.withOpacity(0.8),
-                                size: 30,
+                                size: 20,
                               ),
                               Text(
-                                'Total discoveries: 10',
+                                'Total discoveries: $totalDiscoveries',
                                 style: TextStyle(
                                   color: Colors.black.withOpacity(0.7),
-                                  fontSize: 20,
+                                  fontSize: 16,
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -72,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20), // Add some space between the upper and lower containers
+                SizedBox(height: 20),
                 Container(
                   width: screenWidth,
                   decoration: BoxDecoration(
@@ -85,7 +140,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(height: 20), // Add some space at the top
+                      SizedBox(height: 20),
                       Text(
                         'Find your time capsules here',
                         style: TextStyle(
@@ -95,7 +150,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(height: 5), // Add some space between text and button
+                      SizedBox(height: 5),
                       ElevatedButton(
                         onPressed: () {
                           // Add your action here
@@ -105,43 +160,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           primary: primaryColor,
                           onPrimary: Colors.white,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20), // Adjust the radius as needed
+                            borderRadius: BorderRadius.circular(20),
                           ),
                         ),
                       ),
-                      SizedBox(height: 05), // Add some space between the buttons
-                      ItemCard(
-                        imageName: "patlu",
-                        date: "07/07/2021",
-                        image: "https://via.placeholder.com/100x100",
-                      ),
-                      SizedBox(height: 5),
-                      ItemCard(
-                        imageName: "patlu",
-                        date: "07/07/2021",
-                        image: "https://via.placeholder.com/100x100",
-                      ),SizedBox(height: 5),
-                      ItemCard(
-                        imageName: "patlu",
-                        date: "07/07/2021",
-                        image: "https://via.placeholder.com/100x100",
-                      ),SizedBox(height: 5),
-                      ItemCard(
-                        imageName: "patlu",
-                        date: "07/07/2021",
-                        image: "https://via.placeholder.com/100x100",
-                      ),SizedBox(height: 5),
-                      ItemCard(
-                        imageName: "patlu",
-                        date: "07/07/2021",
-                        image: "https://via.placeholder.com/100x100",
-                      ),SizedBox(height: 5),
-                      ItemCard(
-                        imageName: "patlu",
-                        date: "07/07/2021",
-                        image: "https://via.placeholder.com/100x100",
-                      ),
-                      SizedBox(height: 100), // Add some space at the bottom
+                      const SizedBox(height: 20),
+                      Column(
+                        children: [
+                          // Display the recent 5 items or a message if no items are available
+                          if (savedImages.isNotEmpty)
+                            for (var item in savedImages)
+                              ItemCard(
+                                imageName: item['imageName'],
+                                date: item['date'],
+                                image: item['image'],
+                              )
+                          else
+                            const Text(
+                              "Try discovering new items and check back here.",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontFamily: "Poppins",
+                              ),
+                            ),
+                        ],
+                      )
                     ],
                   ),
                 ),

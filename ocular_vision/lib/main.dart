@@ -31,7 +31,11 @@ class App extends StatelessWidget {
           //         ? "Poppins"
           //         : null),
 
-          home: RootScreen(),
+          home: RootScreen(
+            userName: 'PatluPrasad',
+            userImage: 'https://via.placeholder.com/100x100',
+            email: 'patluPrasad@yahoo.com',
+          ),
         ),
       );
 }
