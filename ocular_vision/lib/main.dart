@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ocular_vision/src/screens/auth_screen.dart';
 import 'package:ocular_vision/src/screens/google_sign_in.dart';
 import 'package:ocular_vision/src/screens/logged_in_widget.dart';
 import 'package:ocular_vision/src/screens/root_screen.dart';
@@ -31,7 +32,7 @@ class App extends StatelessWidget {
           //         ? "Poppins"
           //         : null),
 
-          home: RootScreen(),
+          home: AuthScreen(),
         ),
       );
 }

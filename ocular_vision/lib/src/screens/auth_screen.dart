@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ocular_vision/src/screens/logged_in_widget.dart';
 import 'package:ocular_vision/src/screens/profile_screen.dart';
+import 'package:ocular_vision/src/screens/root_screen.dart';
 
 class AuthScreen extends StatelessWidget {
   @override
@@ -12,7 +13,7 @@ class AuthScreen extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
             } else if (snapshot.hasData) {
-              return LoggedInWidget();
+              return RootScreen();
             } else if (snapshot.hasError) {
               return Center(child: Text('Something Went Wrong!'));
             } else {
