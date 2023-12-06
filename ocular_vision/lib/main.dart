@@ -7,6 +7,7 @@ import 'package:ocular_vision/src/screens/logged_in_widget.dart';
 import 'package:ocular_vision/src/screens/root_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
+import 'package:ocular_vision/src/screens/auth_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

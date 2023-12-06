@@ -1,7 +1,9 @@
+// logged_in_widget.dart
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ocular_vision/src/screens/google_sign_in.dart';
 import 'package:provider/provider.dart';
+import 'package:ocular_vision/src/screens/auth_screen.dart'; // Import AuthScreen
 
 class LoggedInWidget extends StatelessWidget {
   @override
@@ -9,47 +11,54 @@ class LoggedInWidget extends StatelessWidget {
     final user = FirebaseAuth.instance.currentUser!;
 
     return Scaffold(
-        body: Stack(
-      children: [
-        Align(
-          alignment: Alignment.topRight,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 50, right: 20),
-            child: TextButton(
+      body: Stack(
+        children: [
+          Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 50, right: 20),
+              child: TextButton(
                 onPressed: () {
                   final provider =
                       Provider.of<GoogleSignInProvider>(context, listen: false);
                   provider.logout();
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => AuthScreen(), // Navigate back to AuthScreen
+                    ),
+                  );
                 },
-                child: Text('Logout')),
+                child: Text('Logout'),
+              ),
+            ),
           ),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Profile',
-              style: TextStyle(fontSize: 24),
-            ),
-            SizedBox(
-              height: 32,
-            ),
-            CircleAvatar(
-              radius: 40,
-              backgroundImage: NetworkImage(user.photoURL!),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Text(user.displayName!, style: TextStyle(fontSize: 20)),
-            SizedBox(
-              height: 8,
-            ),
-            Text(user.email!, style: TextStyle(fontSize: 18))
-          ],
-        )
-      ],
-    ));
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Profile',
+                style: TextStyle(fontSize: 24),
+              ),
+              SizedBox(
+                height: 32,
+              ),
+              CircleAvatar(
+                radius: 40,
+                backgroundImage: NetworkImage(user.photoURL!),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Text(user.displayName!, style: TextStyle(fontSize: 20)),
+              SizedBox(
+                height: 8,
+              ),
+              Text(user.email!, style: TextStyle(fontSize: 18))
+            ],
+          )
+        ],
+      ),
+    );
   }
 }
