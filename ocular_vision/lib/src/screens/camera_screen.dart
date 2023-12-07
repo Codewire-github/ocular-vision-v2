@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+
 import 'package:ocular_vision/src/screens/info_screen.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -40,7 +41,7 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   void initState() {
     super.initState();
-    _initializeCamera();
+    // _initializeCamera();
     setState(() {
       _image = null;
     });
@@ -125,15 +126,15 @@ class _CameraScreenState extends State<CameraScreen> {
       body: Stack(children: [
         Stack(
           children: [
-            Container(
-                height: double.infinity,
-                width: double.infinity,
-                margin: EdgeInsets.only(bottom: 90),
-                child: _controller!.value.isInitialized
-                    ? CameraPreview(_controller!)
-                    : const Center(
-                        child: CircularProgressIndicator(),
-                      )),
+            // Container(
+            //     height: double.infinity,
+            //     width: double.infinity,
+            //     margin: EdgeInsets.only(bottom: 90),
+            //     child: _controller!.value.isInitialized
+            //         ? CameraPreview(_controller!)
+            //         : const Center(
+            //             child: CircularProgressIndicator(),
+            //           )),
             Align(
               alignment: Alignment.topLeft,
               child: Padding(

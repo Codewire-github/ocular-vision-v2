@@ -32,7 +32,6 @@ class DiscoveryCard extends StatelessWidget {
       },
       child: Container(
         width: double.infinity,
-        height: 230,
         padding: const EdgeInsets.all(15),
         margin: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(

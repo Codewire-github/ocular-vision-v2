@@ -5,6 +5,7 @@ import 'package:ocular_vision/src/screens/info_screen.dart';
 import 'package:ocular_vision/src/screens/profile_screen.dart';
 import 'package:ocular_vision/src/widgets/bottom_nav_bar.dart';
 import 'package:ocular_vision/src/screens/camera_screen.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key});
@@ -27,6 +28,10 @@ class _RootScreenState extends State<RootScreen> {
     ProfileScreen(),
   ];
 
+  void showTextAlert(String message) {
+    Get.snackbar('Alert', message, duration: const Duration(seconds: 4));
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -38,10 +43,20 @@ class _RootScreenState extends State<RootScreen> {
         floatingActionButton: Transform.scale(
           scale: 1.5,
           child: FloatingActionButton(
-            onPressed: () {
-              Get.to(CameraScreen());
+            onPressed: () async {
+              var cameraStatus = await Permission.camera.request();
+              print('$cameraStatus');
+              if (cameraStatus.isGranted) {
+                Get.to(const CameraScreen());
+              } else if (cameraStatus.isPermanentlyDenied) {
+                showTextAlert(
+                    'Camera permission is permanently denied. Please enable it in the device settings.');
+                openAppSettings();
+              } else {
+                showTextAlert('Camera access denied. Failed to continue');
+              }
             },
-            backgroundColor: const Color.fromARGB(255, 195, 226, 84),
+            backgroundColor: const Color.fromARGB(255, 74, 2, 255),
             elevation: 4,
             shape: RoundedRectangleBorder(
               borderRadius:
