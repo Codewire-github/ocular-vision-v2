@@ -12,6 +12,7 @@ class DiscoveryCard extends StatelessWidget {
   final int totalItems;
   final int discoveredItems;
   final int index;
+  final dynamic responseData;
 
   const DiscoveryCard(
       {super.key,
@@ -22,13 +23,18 @@ class DiscoveryCard extends StatelessWidget {
       required this.imgPath,
       required this.totalItems,
       required this.discoveredItems,
-      required this.index});
+      required this.index,
+      required this.responseData
+      });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(const CategoriesListScreen(), arguments: index);
+        Get.to(
+          const CategoriesListScreen(),
+          arguments: {'index': index, 'discoveredItems': discoveredItems, 'responseData': responseData},
+        );
       },
       child: Container(
         width: double.infinity,

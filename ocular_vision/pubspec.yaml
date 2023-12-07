@@ -45,7 +45,19 @@ dependencies:
   image_picker: ^1.0.4
   google_fonts: ^6.1.0
   google_mlkit_image_labeling: ^0.10.0
+  intl: ^0.18.1
   permission_handler: ^11.1.0
+
+  # Google Sign in
+  firebase_core: ^2.23.0
+  firebase_auth: ^4.14.1
+  google_sign_in: ^6.1.6
+
+  #Google Icon
+  font_awesome_flutter: ^10.6.0
+
+  #State management
+  provider: ^6.1.1
 
 dev_dependencies:
   flutter_test:

@@ -9,11 +9,14 @@ import 'package:ocular_vision/src/screens/info_screen.dart';
 import 'package:path_provider/path_provider.dart';
 
 class CameraScreen extends StatefulWidget {
-  const CameraScreen({super.key});
+  final String email;
+
+  const CameraScreen({Key? key, required this.email}) : super(key: key);
 
   @override
   State<CameraScreen> createState() => _CameraScreenState();
 }
+
 
 class _CameraScreenState extends State<CameraScreen> {
   CameraController? _controller;
@@ -198,9 +201,11 @@ class _CameraScreenState extends State<CameraScreen> {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) => InfoScreen(
-                                      option: selectedOption,
-                                      photo: _image!,
-                                    )),
+                                  option: selectedOption,
+                                  category: options[selectedOption],
+                                  photo: _image!,
+                                  email: widget.email, // Pass the email parameter
+                                )),                                 
                           );
                         }
                       },
@@ -223,7 +228,9 @@ class _CameraScreenState extends State<CameraScreen> {
                         MaterialPageRoute(
                             builder: (BuildContext context) => InfoScreen(
                                   option: selectedOption,
+                                  category: options[selectedOption],
                                   photo: _image!,
+                                  email: widget.email
                                 )),
                       );
                     },
