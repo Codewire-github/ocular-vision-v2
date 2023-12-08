@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ocular_vision/src/screens/auth_screen.dart';
 import 'package:ocular_vision/src/screens/google_sign_in.dart';
-import 'package:ocular_vision/src/screens/logged_in_widget.dart';
-import 'package:ocular_vision/src/screens/root_screen.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-import 'package:ocular_vision/src/screens/auth_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +30,7 @@ class App extends StatelessWidget {
           //         ? "Poppins"
           //         : null),
 
-          home: AuthScreen(),
+          home: const AuthScreen(),
         ),
       );
 }

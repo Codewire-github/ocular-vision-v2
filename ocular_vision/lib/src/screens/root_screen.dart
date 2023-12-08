@@ -34,7 +34,7 @@ class _RootScreenState extends State<RootScreen> {
   @override
   void initState() {
     super.initState();
-    getUserData(userEmail);
+    getUserData(widget.email);
   }
 
   void navigateBottomBar(int index) {
@@ -143,7 +143,7 @@ class _RootScreenState extends State<RootScreen> {
   }
 
   Future<void> getUserData(String userEmail) async {
-    final String apiUrl = "http://192.168.1.12:8080/api/ocular";
+    final String apiUrl = "http://192.168.31.62:8080/api/ocular";
     final response = await http.get(Uri.parse('$apiUrl?userName=$userEmail'));
 
     if (response.statusCode == 200) {

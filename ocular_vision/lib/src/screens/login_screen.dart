@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:get/get.dart';
 import 'package:ocular_vision/src/screens/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 class LogoWidget extends StatelessWidget {
+  const LogoWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     double fem = MediaQuery.of(context).size.width / 393;
@@ -23,6 +24,8 @@ class LogoWidget extends StatelessWidget {
 }
 
 class TitleWidget extends StatelessWidget {
+  const TitleWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     double fem = MediaQuery.of(context).size.width / 393;
@@ -41,7 +44,7 @@ class TitleWidget extends StatelessWidget {
 }
 
 class LoginScreen extends StatelessWidget {
-  LoginScreen();
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                 child: Container(
                   width: screenWidth,
                   padding: EdgeInsets.symmetric(
-                    horizontal: 72 * fem,
+                    horizontal: 50 * fem,
                   ),
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(color: Color(0xFF171717)),
@@ -72,8 +75,16 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       LogoWidget(),
                       const SizedBox(height: 31),
-                      Text('Hello'),
                       TitleWidget(),
+                      SizedBox(height: 15),
+                      Text(
+                        'Explore the world around you',
+                        style: TextStyle(
+                            color: Colors.grey[500],
+                            fontWeight: FontWeight.w500,
+                            fontFamily: "Poppins",
+                            fontSize: 19),
+                      ),
                     ],
                   ),
                 ),
@@ -82,25 +93,42 @@ class LoginScreen extends StatelessWidget {
                 bottom: 0,
                 left: 0,
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 40),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   width: screenWidth,
-                  height: 180 * fem,
+                  height: 220 * fem,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(60 * fem),
-                        topRight: Radius.circular(60 * fem),
+                        topLeft: Radius.circular(50 * fem),
+                        topRight: Radius.circular(50 * fem),
                       ),
-                      color: Color.fromARGB(
-                          255, 135, 115, 144) // Set the desired color here
+                      color: Colors.white // Set the desired color here
                       ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Text(
+                        "Welcome to Ocular Vision",
+                        style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontSize: 22,
+                            fontWeight: FontWeight.w700),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        "Automatically sync your profile to the cloud.",
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey[600]),
+                      ),
+                      const SizedBox(height: 10),
                       Container(
-                        padding: EdgeInsets.symmetric(vertical: 5),
+                        padding: const EdgeInsets.symmetric(vertical: 5),
                         width: double.infinity,
                         decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: const Color.fromARGB(255, 2, 2, 230),
                             borderRadius: BorderRadius.circular(20)),
                         child: TextButton.icon(
                             onPressed: () {
@@ -109,16 +137,36 @@ class LoginScreen extends StatelessWidget {
                                       listen: false);
                               provider.googleLogin();
                             },
-                            icon: FaIcon(
+                            icon: const FaIcon(
                               FontAwesomeIcons.google,
-                              color: Colors.black,
+                              color: Colors.white,
                             ),
-                            label: Text(
+                            label: const Text(
                               "Continue with Google",
                               style:
-                                  TextStyle(color: Colors.black, fontSize: 17),
+                                  TextStyle(color: Colors.white, fontSize: 16),
                             )),
-                      )
+                      ),
+                      const SizedBox(height: 10),
+                      TextButton.icon(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.center_focus_strong_rounded,
+                            size: 25,
+                            color: Color.fromARGB(255, 2, 2, 230),
+                          ),
+                          label: Text(
+                            "Continue scanning without signing in.",
+                            style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: "Poppins",
+                                color: Color.fromARGB(255, 2, 2, 230),
+                                decoration: TextDecoration.underline,
+                                decorationStyle: TextDecorationStyle.solid,
+                                decorationColor:
+                                    Color.fromARGB(255, 2, 2, 230)),
+                          ))
                     ],
                   ),
                 ),
