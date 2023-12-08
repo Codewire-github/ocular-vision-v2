@@ -28,8 +28,6 @@ class _RootScreenState extends State<RootScreen> {
 
   dynamic responseData; // Hold the response data
   int selectedIndex = 0;
-  String userEmail =
-      "patluPrasad@yahoo.com"; // Variable accessible throughout the screen
 
   @override
   void initState() {
@@ -51,6 +49,7 @@ class _RootScreenState extends State<RootScreen> {
           responseData: responseData,
           userName: user.displayName!,
           userImage: user.photoURL!,
+          email: user.email!,
         ),
         //AuthScreen()
       ];
