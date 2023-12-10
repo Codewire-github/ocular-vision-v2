@@ -28,13 +28,11 @@ class _RootScreenState extends State<RootScreen> {
 
   dynamic responseData; // Hold the response data
   int selectedIndex = 0;
-  String userEmail =
-      "patluPrasad@yahoo.com"; // Variable accessible throughout the screen
 
   @override
   void initState() {
     super.initState();
-    getUserData(userEmail);
+    getUserData(widget.email);
   }
 
   void navigateBottomBar(int index) {
@@ -51,6 +49,7 @@ class _RootScreenState extends State<RootScreen> {
           responseData: responseData,
           userName: user.displayName!,
           userImage: user.photoURL!,
+          email: user.email!,
         ),
         //AuthScreen()
       ];
@@ -143,7 +142,7 @@ class _RootScreenState extends State<RootScreen> {
   }
 
   Future<void> getUserData(String userEmail) async {
-    final String apiUrl = "http://192.168.1.12:8080/api/ocular";
+    final String apiUrl = "http://192.168.31.62:8080/api/ocular";
     final response = await http.get(Uri.parse('$apiUrl?userName=$userEmail'));
 
     if (response.statusCode == 200) {

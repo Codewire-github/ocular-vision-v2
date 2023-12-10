@@ -1,11 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:ocular_vision/src/APIs/info_fetching.dart';
-import 'package:ocular_vision/src/common/color_constants.dart';
 
-class InformationContainer extends StatelessWidget {
+class InformationContainer extends StatefulWidget {
   final String result;
   final int noOfObjectsFound;
   final bool isBookmarked;
@@ -24,6 +22,12 @@ class InformationContainer extends StatelessWidget {
       required this.isBookmarkedCallback,
       required this.imageUrls});
 
+  @override
+  State<InformationContainer> createState() => _InformationContainerState();
+}
+
+class _InformationContainerState extends State<InformationContainer> {
+  bool isSeeMore = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -46,7 +50,7 @@ class InformationContainer extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10), color: Colors.black),
             ),
             const SizedBox(height: 15),
-            if (noOfObjectsFound == 0) ...{
+            if (widget.noOfObjectsFound == 0) ...{
               const SizedBox(
                 height: 30,
               ),
@@ -64,11 +68,11 @@ class InformationContainer extends StatelessWidget {
               ),
               const SizedBox(height: 10),
             },
-            if (noOfObjectsFound != 0) ...{
+            if (widget.noOfObjectsFound != 0) ...{
               Container(
                 height: 230,
                 child: ListView.builder(
-                    itemCount: imageUrls.length,
+                    itemCount: widget.imageUrls.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
@@ -76,7 +80,7 @@ class InformationContainer extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(15),
                           child: Image.network(
-                            imageUrls[index],
+                            widget.imageUrls[index],
                             height: 220,
                             width: 280,
                             fit: BoxFit.cover,
@@ -93,7 +97,7 @@ class InformationContainer extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    result,
+                    widget.result,
                     style: const TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w600,
@@ -101,35 +105,67 @@ class InformationContainer extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (noOfObjectsFound != 0) ...{
+                if (widget.noOfObjectsFound != 0) ...{
                   IconButton(
                     onPressed: () {
-                      isBookmarkedCallback(!isBookmarked);
+                      widget.isBookmarkedCallback(!widget.isBookmarked);
 
-                      print(isBookmarked);
+                      print(widget.isBookmarked);
                     },
                     icon: Icon(
                       Icons.bookmark,
                       size: 40,
-                      color: isBookmarked ? Colors.yellow : Colors.black,
+                      color: widget.isBookmarked
+                          ? const Color.fromARGB(255, 62, 59, 255)
+                          : Colors.grey[300],
                     ),
                   ),
                 }
               ],
             ),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 17),
-              child: Text(
-                description,
-                style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: "Poppins",
-                    color: Colors.black),
-                maxLines: 4,
-                overflow: TextOverflow.ellipsis,
+            if (isSeeMore) ...{
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 22, horizontal: 10),
+                child: Text(
+                  widget.description,
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: "Poppins",
+                      color: Colors.grey[700]),
+                ),
               ),
-            ),
+            } else ...{
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 22, horizontal: 10),
+                child: Text(
+                  widget.description,
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: "Poppins",
+                      color: Colors.grey[700]),
+                  maxLines: 4,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            },
+            TextButton(
+                onPressed: () {
+                  setState(() {
+                    isSeeMore = !isSeeMore;
+                  });
+                },
+                child: const Text(
+                  "See more",
+                  style: TextStyle(
+                      color: const Color.fromARGB(255, 62, 59, 255),
+                      fontWeight: FontWeight.w600,
+                      fontSize: 15,
+                      fontFamily: "Poppins"),
+                )),
             const SizedBox(height: 20),
           ],
         ),
@@ -170,6 +206,7 @@ class _FoodInformationContainerState extends State<FoodInformationContainer> {
   List<String> dishesList = [];
   int selectedOption = 0;
   bool isShowRecipe = false;
+  bool isSeeMore = false;
   @override
   void initState() {
     super.initState();
@@ -236,9 +273,9 @@ class _FoodInformationContainerState extends State<FoodInformationContainer> {
       width: double.infinity,
       height: MediaQuery.sizeOf(context).height * 0.7,
       padding: const EdgeInsets.fromLTRB(10, 20, 20, 0),
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(40)),
-        color: Colors.white,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
+        color: Color.fromARGB(255, 233, 232, 239),
       ),
       child: SingleChildScrollView(
         child: Column(
@@ -293,48 +330,91 @@ class _FoodInformationContainerState extends State<FoodInformationContainer> {
               ),
             },
             const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment:
-                  MainAxisAlignment.spaceBetween, // Adjusted alignment
-              children: [
-                const SizedBox(width: 5),
-                Expanded(
-                  child: Text(
-                    widget.result,
-                    style: const TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: "Poppins",
-                    ),
-                  ),
-                ),
-                if (widget.noOfObjectsFound != 0) ...{
-                  IconButton(
-                    onPressed: () {
-                      widget.isBookmarkedCallback(!widget.isBookmarked);
-
-                      print(widget.isBookmarked);
-                    },
-                    icon: Icon(
-                      Icons.bookmark,
-                      size: 40,
-                      color: widget.isBookmarked ? Colors.yellow : Colors.black,
-                    ),
-                  ),
-                }
-              ],
-            ),
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 17),
-              child: Text(
-                widget.description,
-                style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: "Poppins",
-                    color: Colors.black),
-                maxLines: 4,
-                overflow: TextOverflow.ellipsis,
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween, // Adjusted alignment
+                    children: [
+                      const SizedBox(width: 5),
+                      Expanded(
+                        child: Text(
+                          widget.result,
+                          style: const TextStyle(
+                            fontSize: 26,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: "Poppins",
+                          ),
+                        ),
+                      ),
+                      if (widget.noOfObjectsFound != 0) ...{
+                        IconButton(
+                          onPressed: () {
+                            widget.isBookmarkedCallback(!widget.isBookmarked);
+
+                            print(widget.isBookmarked);
+                          },
+                          icon: Icon(
+                            Icons.bookmark,
+                            size: 40,
+                            color: widget.isBookmarked
+                                ? const Color.fromARGB(255, 62, 59, 255)
+                                : Colors.grey[300],
+                          ),
+                        ),
+                      }
+                    ],
+                  ),
+                  if (isSeeMore) ...{
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 22, horizontal: 7),
+                      child: Text(
+                        widget.description,
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: "Poppins",
+                            color: Colors.grey[700]),
+                      ),
+                    ),
+                  } else ...{
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 22, horizontal: 7),
+                      child: Text(
+                        widget.description,
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: "Poppins",
+                            color: Colors.grey[700]),
+                        maxLines: 4,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  },
+                  TextButton(
+                      onPressed: () {
+                        setState(() {
+                          isSeeMore = !isSeeMore;
+                        });
+                      },
+                      child: const Text(
+                        "See more",
+                        style: TextStyle(
+                            color: const Color.fromARGB(255, 62, 59, 255),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
+                            fontFamily: "Poppins"),
+                      )),
+                ],
               ),
             ),
             const SizedBox(height: 20),
@@ -635,21 +715,24 @@ class AnimalInformationContainer extends StatefulWidget {
 
 class _AnimalInformationContainerState
     extends State<AnimalInformationContainer> {
+  int selectedOption = 0;
   List<dynamic> animalExtraInformation = [];
+  List<String> animalTypeList = [];
   String result = "";
+  bool isSeeMore = false;
   TextStyle titleStyle = const TextStyle(
-    fontSize: 16.5,
+    fontSize: 17.5,
     fontWeight: FontWeight.w600,
     fontFamily: "Poppins",
   );
-  TextStyle subTitleStyle = const TextStyle(
+  TextStyle subTitleStyle = TextStyle(
+      fontSize: 15.5,
+      fontWeight: FontWeight.w500,
+      fontFamily: "Poppins",
+      color: Colors.grey[700]);
+  TextStyle normalStyle = const TextStyle(
     fontSize: 15.5,
     fontWeight: FontWeight.w500,
-    fontFamily: "Poppins",
-  );
-  TextStyle normalStyle = const TextStyle(
-    fontSize: 14.5,
-    fontWeight: FontWeight.w400,
     fontFamily: "Poppins",
   );
 
@@ -679,6 +762,19 @@ class _AnimalInformationContainerState
     } catch (e) {
       print("Error fetching data: $e");
     }
+    setState(() {
+      animalTypeList = animalExtraInformation.isNotEmpty
+          ? animalExtraInformation
+              .map((animal) => animal['name'].toString())
+              .toList()
+          : [];
+    });
+  }
+
+  void handleOptionPressed(int val) {
+    setState(() {
+      selectedOption = val;
+    });
   }
 
   @override
@@ -694,7 +790,7 @@ class _AnimalInformationContainerState
       padding: const EdgeInsets.fromLTRB(10, 20, 20, 0),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
-        color: Colors.white,
+        color: Color.fromARGB(255, 233, 232, 239),
       ),
       child: SingleChildScrollView(
         child: Column(
@@ -739,70 +835,166 @@ class _AnimalInformationContainerState
                   }),
             ),
             const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween, // Adjusted alignment
-                crossAxisAlignment: CrossAxisAlignment.center,
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Column(
                 children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.result,
-                          style: const TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: "Poppins",
-                          ),
+                  Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween, // Adjusted alignment
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.result,
+                              style: const TextStyle(
+                                fontSize: 26,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: "Poppins",
+                              ),
+                            ),
+                            Text(
+                              animalExtraInformation.isNotEmpty
+                                  ? animalExtraInformation[selectedOption]
+                                          ['taxonomy']['scientific_name'] ??
+                                      ""
+                                  : "",
+                              style: const TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
                         ),
-                        Text(
-                          animalExtraInformation.isNotEmpty
-                              ? animalExtraInformation[0]['taxonomy']
-                                      ['scientific_name'] ??
-                                  ""
-                              : "",
-                          style: const TextStyle(
-                            fontSize: 15,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      widget.isBookmarkedCallback(!widget.isBookmarked);
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          widget.isBookmarkedCallback(!widget.isBookmarked);
 
-                      print(widget.isBookmarked);
-                    },
-                    icon: Icon(
-                      Icons.bookmark,
-                      size: 40,
-                      color: widget.isBookmarked ? Colors.yellow : Colors.black,
-                    ),
+                          print(widget.isBookmarked);
+                        },
+                        icon: Icon(
+                          Icons.bookmark,
+                          size: 40,
+                          color: widget.isBookmarked
+                              ? const Color.fromARGB(255, 62, 59, 255)
+                              : Colors.grey[300],
+                        ),
+                      ),
+                    ],
                   ),
+                  if (isSeeMore) ...{
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 22, horizontal: 12.5),
+                      child: Text(
+                        widget.description,
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: "Poppins",
+                            color: Colors.grey[700]),
+                      ),
+                    ),
+                  } else ...{
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 22, horizontal: 12.5),
+                      child: Text(
+                        widget.description,
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: "Poppins",
+                            color: Colors.grey[700]),
+                        maxLines: 4,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  },
+                  TextButton(
+                      onPressed: () {
+                        setState(() {
+                          isSeeMore = !isSeeMore;
+                        });
+                      },
+                      child: const Text(
+                        "See more",
+                        style: TextStyle(
+                            color: const Color.fromARGB(255, 62, 59, 255),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
+                            fontFamily: "Poppins"),
+                      ))
                 ],
               ),
             ),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 15),
-              child: Text(
-                widget.description,
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: "Poppins",
-                    color: Colors.grey[700]),
-                maxLines: 4,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
             const SizedBox(height: 20),
+            if (animalTypeList.length > 1) ...{
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                const SizedBox(height: 10),
+                Text(
+                  "Select a type of $result:",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey[600]),
+                ),
+                const SizedBox(height: 15),
+                Container(
+                  height: 55,
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15)),
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: animalTypeList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        bool isSelected = selectedOption == index;
+
+                        return Container(
+                          alignment: Alignment.center,
+                          padding: const EdgeInsetsDirectional.symmetric(
+                            horizontal: 15,
+                          ),
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 2.5,
+                          ),
+                          decoration: BoxDecoration(
+                              color:
+                                  isSelected ? Colors.black : Colors.grey[300],
+                              borderRadius: BorderRadius.circular(25)),
+                          child: TextButton(
+                            onPressed: () {
+                              handleOptionPressed(index);
+                            },
+                            child: Text(animalTypeList[index],
+                                style: TextStyle(
+                                    color: isSelected
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: "Poppins",
+                                    fontSize: 15)),
+                          ),
+                        );
+                      }),
+                ),
+              ]),
+              const SizedBox(height: 15),
+            },
             if (animalExtraInformation.isNotEmpty) ...{
               Text(
-                "'${animalExtraInformation[0]['characteristics']['slogan'] ?? ""}'",
+                "'${animalExtraInformation[selectedOption]['characteristics']['slogan'] ?? ""}'",
                 style: TextStyle(
                     fontSize: 16,
                     fontStyle: FontStyle.italic,
@@ -816,11 +1008,11 @@ class _AnimalInformationContainerState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.4,
+                    width: MediaQuery.of(context).size.width * 0.55,
                     padding: EdgeInsets.all(17),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: Color.fromARGB(255, 255, 234, 213),
+                      color: Colors.white,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -828,7 +1020,8 @@ class _AnimalInformationContainerState
                         Text("Estimated population:", style: titleStyle),
                         const SizedBox(height: 10),
                         Text(
-                            animalExtraInformation[0]['characteristics']
+                            animalExtraInformation[selectedOption]
+                                        ['characteristics']
                                     ['estimated_population_size'] ??
                                 "",
                             style: normalStyle)
@@ -848,7 +1041,7 @@ class _AnimalInformationContainerState
                     padding: EdgeInsets.all(17),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      color: Color.fromARGB(255, 255, 234, 213),
+                      color: Colors.white,
                     ),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -868,7 +1061,7 @@ class _AnimalInformationContainerState
                     padding: EdgeInsets.all(17),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: Color.fromARGB(255, 255, 234, 213),
+                      color: Colors.white,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -879,15 +1072,16 @@ class _AnimalInformationContainerState
                         ),
                         const SizedBox(height: 5),
                         Text(
-                          animalExtraInformation[0]['locations']!.toString(),
+                          animalExtraInformation[selectedOption]['locations']!
+                              .toString(),
                           style: normalStyle,
                         ),
                         Text(
-                          animalExtraInformation[0]['characteristics']
-                                      ["location"] !=
+                          animalExtraInformation[selectedOption]
+                                      ['characteristics']["location"] !=
                                   null
-                              ? animalExtraInformation[0]['characteristics']
-                                  ["location"]!
+                              ? animalExtraInformation[selectedOption]
+                                  ['characteristics']["location"]!
                               : "",
                           style: normalStyle,
                         )
@@ -901,12 +1095,12 @@ class _AnimalInformationContainerState
                 padding: EdgeInsets.all(17),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
-                  color: Color.fromARGB(255, 255, 230, 207),
+                  color: Colors.white,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Characteristics", style: titleStyle),
+                    Text("🐾 Characteristics", style: titleStyle),
                     const SizedBox(height: 5),
                     characteristicsTextContainer(
                         'Name of young', 'name_of_young'),
@@ -916,6 +1110,10 @@ class _AnimalInformationContainerState
                     characteristicsTextContainer('Prey', 'prey'),
                     characteristicsTextContainer('Diet', 'diet'),
                     characteristicsTextContainer('Predators', 'predators'),
+                    characteristicsTextContainer('Skin type', 'skin_type'),
+                    characteristicsTextContainer('Color', 'color'),
+                    characteristicsTextContainer(
+                        'Distinctive feature', 'most_distinctive_feature')
                   ],
                 ),
               ),
@@ -924,7 +1122,7 @@ class _AnimalInformationContainerState
                 padding: EdgeInsets.all(17),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
-                  color: Color.fromARGB(255, 255, 230, 207),
+                  color: Colors.white,
                 ),
                 child: Column(
                   children: [
@@ -948,39 +1146,59 @@ class _AnimalInformationContainerState
   }
 
   Widget infoTextContainer(String subTitle, String attribute) {
-    return Row(
-      children: [
-        Text(
-          "$subTitle:  ",
-          style: subTitleStyle,
-        ),
-        Text(
-          animalExtraInformation.isNotEmpty
-              ? animalExtraInformation[0]['taxonomy'][attribute] ?? ""
-              : "",
-          style: normalStyle,
-        )
-      ],
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 7),
+      decoration: BoxDecoration(
+          border:
+              Border(bottom: BorderSide(color: Colors.grey[300]!, width: 2))),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            "$subTitle:  ",
+            style: subTitleStyle,
+          ),
+          Flexible(
+            flex: 1,
+            child: Text(
+              animalExtraInformation.isNotEmpty
+                  ? animalExtraInformation[selectedOption]['taxonomy']
+                          [attribute] ??
+                      ""
+                  : "",
+              style: normalStyle,
+            ),
+          )
+        ],
+      ),
     );
   }
 
   Widget characteristicsTextContainer(String subTitle, String attribute) {
-    return Row(
-      children: [
-        Text(
-          "$subTitle:  ",
-          style: subTitleStyle,
-        ),
-        Flexible(
-          flex: 1,
-          child: Text(
-            animalExtraInformation.isNotEmpty
-                ? animalExtraInformation[0]['characteristics'][attribute] ?? ""
-                : "",
-            style: normalStyle,
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 7),
+      decoration: BoxDecoration(
+          border:
+              Border(bottom: BorderSide(color: Colors.grey[300]!, width: 2))),
+      child: Row(
+        children: [
+          Text(
+            "$subTitle:  ",
+            style: subTitleStyle,
           ),
-        )
-      ],
+          Flexible(
+            flex: 1,
+            child: Text(
+              animalExtraInformation.isNotEmpty
+                  ? animalExtraInformation[selectedOption]['characteristics']
+                          [attribute] ??
+                      ""
+                  : "",
+              style: normalStyle,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ocular_vision/src/common/color_constants.dart';
 import 'package:ocular_vision/src/screens/auth_screen.dart';
@@ -11,13 +12,15 @@ class ProfileScreen extends StatefulWidget {
   final dynamic responseData;
   final String userName;
   final String userImage;
+  final String email;
 
-  ProfileScreen({
-    Key? key,
-    required this.responseData,
-    required this.userName,
-    required this.userImage,
-  }) : super(key: key);
+  ProfileScreen(
+      {Key? key,
+      required this.responseData,
+      required this.userName,
+      required this.userImage,
+      required this.email})
+      : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -86,19 +89,66 @@ class _ProfileScreenState extends State<ProfileScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Align(
-                  alignment: Alignment.topRight,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 50, right: 20),
-                    child: TextButton(
-                      onPressed: () {
-                        final provider = Provider.of<GoogleSignInProvider>(
-                            context,
-                            listen: false);
-                        provider.logout();
+                  alignment: Alignment.center,
+                  child: Container(
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(top: 50, left: 20, right: 10),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'My profile',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 27,
+                                  fontFamily: "Poppins"),
+                            ),
+                            TextButton.icon(
+                              label: Text(""),
+                              icon: FaIcon(
+                                FontAwesomeIcons.bars,
+                                color: Colors.black,
+                              ),
+                              onPressed: () {
+                                showModalBottomSheet(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return Container(
+                                        padding: EdgeInsets.all(16),
+                                        width: screenWidth,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            TextButton.icon(
+                                              onPressed: () {
+                                                final provider = Provider.of<
+                                                        GoogleSignInProvider>(
+                                                    context,
+                                                    listen: false);
+                                                provider.logout();
 
-                        // Get.offAll(() => {AuthScreen()});
-                      },
-                      child: Text('Logout'),
+                                                // Get.offAll(() => {AuthScreen()});
+                                              },
+                                              label: Text(
+                                                'Logout',
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: primaryColor,
+                                                ),
+                                              ),
+                                              icon: FaIcon(
+                                                FontAwesomeIcons.signOut,
+                                                color: primaryColor,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    });
+                              },
+                            )
+                          ]),
                     ),
                   ),
                 ),
@@ -106,10 +156,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
-                      SizedBox(height: 60),
-                      CircleAvatar(
-                        radius: 60,
-                        backgroundImage: NetworkImage(widget.userImage),
+                      SizedBox(height: 30),
+                      Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.grey.withOpacity(0.4),
+                        ),
+                        height: 150,
+                        width: 150,
+                        padding: EdgeInsets.all(10),
+                        child: ClipOval(
+                          child: CircleAvatar(
+                            radius: 60,
+                            backgroundImage: NetworkImage(widget.userImage),
+                          ),
+                        ),
                       ),
                       SizedBox(height: 20),
                       Column(
@@ -119,26 +180,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             widget.userName,
                             style: TextStyle(
                               color: Color(0xFF171717),
-                              fontSize: 42,
+                              fontSize: 36,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          Row(
+                          Text(
+                            widget.email,
+                            style: TextStyle(
+                                color: Colors.grey[700],
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: "Poppins"),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
-                                Icons.search,
-                                color: Colors.black.withOpacity(0.8),
-                                size: 20,
+                              Text(
+                                '$totalDiscoveries',
+                                style: TextStyle(
+                                    fontSize: 50,
+                                    fontFamily: "Poppins",
+                                    fontWeight: FontWeight.w600),
                               ),
                               Text(
-                                'Total discoveries: $totalDiscoveries',
+                                'Discoveries',
                                 style: TextStyle(
-                                  color: Colors.black.withOpacity(0.7),
-                                  fontSize: 16,
+                                  color: Colors.grey[700],
+                                  fontSize: 20,
                                   fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ],
@@ -151,11 +225,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 SizedBox(height: 20),
                 Container(
                   width: screenWidth,
+                  margin: EdgeInsetsDirectional.all(10),
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(56),
-                      topRight: Radius.circular(56),
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40),
                     ),
                   ),
                   child: Column(
