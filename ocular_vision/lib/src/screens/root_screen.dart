@@ -142,7 +142,7 @@ class _RootScreenState extends State<RootScreen> {
   }
 
   Future<void> getUserData(String userEmail) async {
-    final String apiUrl = "http://192.168.1.7:8080/api/ocular";
+    final String apiUrl = "http://192.168.79.1:8080/api/ocular";
     final response = await http.get(Uri.parse('$apiUrl?userName=$userEmail'));
 
     if (response.statusCode == 200) {
