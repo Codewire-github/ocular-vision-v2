@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:ocular_vision/src/common/color_constants.dart';
 import 'package:ocular_vision/src/screens/auth_screen.dart';
 import 'package:ocular_vision/src/screens/google_sign_in.dart';
+import 'package:ocular_vision/src/widgets/bookmark_item_card.dart';
 import 'package:ocular_vision/src/widgets/item_card.dart';
 import 'package:provider/provider.dart';
 
@@ -80,214 +81,210 @@ class _ProfileScreenState extends State<ProfileScreen> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Center(
-          child: Container(
-            width: screenWidth,
-            decoration: BoxDecoration(color: Colors.white),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(top: 50, left: 20, right: 10),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'My profile',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 27,
-                                  fontFamily: "Poppins"),
-                            ),
-                            TextButton.icon(
-                              label: Text(""),
-                              icon: FaIcon(
-                                FontAwesomeIcons.bars,
-                                color: Colors.black,
-                              ),
-                              onPressed: () {
-                                showModalBottomSheet(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return Container(
-                                        padding: EdgeInsets.all(16),
-                                        width: screenWidth,
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            TextButton.icon(
-                                              onPressed: () {
-                                                final provider = Provider.of<
-                                                        GoogleSignInProvider>(
-                                                    context,
-                                                    listen: false);
-                                                provider.logout();
+      appBar: AppBar(
+        leadingWidth: 200,
+        leading: Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+          child: const Text(
+            "My Profile",
+            style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 27,
+                fontFamily: "Poppins"),
+          ),
+        ),
+        actions: [
+          TextButton.icon(
+            label: Text(""),
+            icon: const FaIcon(
+              FontAwesomeIcons.bars,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Container(
+                      padding: EdgeInsets.all(16),
+                      width: screenWidth,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          TextButton.icon(
+                            onPressed: () {
+                              final provider =
+                                  Provider.of<GoogleSignInProvider>(context,
+                                      listen: false);
+                              provider.logout();
 
-                                                // Get.offAll(() => {AuthScreen()});
-                                              },
-                                              label: Text(
-                                                'Logout',
-                                                style: TextStyle(
-                                                  fontSize: 18,
-                                                  color: primaryColor,
-                                                ),
-                                              ),
-                                              icon: FaIcon(
-                                                FontAwesomeIcons.signOut,
-                                                color: primaryColor,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    });
-                              },
-                            )
-                          ]),
+                              // Get.offAll(() => {AuthScreen()});
+                            },
+                            label: Text(
+                              'Logout',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: primaryColor,
+                              ),
+                            ),
+                            icon: FaIcon(
+                              FontAwesomeIcons.signOut,
+                              color: primaryColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  });
+            },
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  SizedBox(height: 5),
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.grey.withOpacity(0.4),
+                    ),
+                    height: 150,
+                    width: 150,
+                    padding: EdgeInsets.all(10),
+                    child: ClipOval(
+                      child: CircleAvatar(
+                        radius: 60,
+                        backgroundImage: NetworkImage(widget.userImage),
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
+                  SizedBox(height: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(height: 30),
-                      Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey.withOpacity(0.4),
-                        ),
-                        height: 150,
-                        width: 150,
-                        padding: EdgeInsets.all(10),
-                        child: ClipOval(
-                          child: CircleAvatar(
-                            radius: 60,
-                            backgroundImage: NetworkImage(widget.userImage),
-                          ),
+                      Text(
+                        widget.userName,
+                        style: TextStyle(
+                          color: Color(0xFF171717),
+                          fontSize: 33,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                      SizedBox(height: 20),
+                      Text(
+                        widget.email,
+                        style: TextStyle(
+                            color: Colors.grey[700],
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: "Poppins"),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            widget.userName,
+                            '$totalDiscoveries',
                             style: TextStyle(
-                              color: Color(0xFF171717),
-                              fontSize: 36,
+                                fontSize: 50,
+                                fontFamily: "Poppins",
+                                fontWeight: FontWeight.w600),
+                          ),
+                          Text(
+                            'Discoveries',
+                            style: TextStyle(
+                              color: Colors.grey[700],
+                              fontSize: 20,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          Text(
-                            widget.email,
-                            style: TextStyle(
-                                color: Colors.grey[700],
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "Poppins"),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '$totalDiscoveries',
-                                style: TextStyle(
-                                    fontSize: 50,
-                                    fontFamily: "Poppins",
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              Text(
-                                'Discoveries',
-                                style: TextStyle(
-                                  color: Colors.grey[700],
-                                  fontSize: 20,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
                         ],
                       ),
                     ],
                   ),
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsetsDirectional.all(10),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40),
+                  topRight: Radius.circular(40),
                 ),
-                SizedBox(height: 20),
-                Container(
-                  width: screenWidth,
-                  margin: EdgeInsetsDirectional.all(10),
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40),
-                      topRight: Radius.circular(40),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 5),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Add your action here
+                    },
+                    child: Text('Bookmarks'),
+                    style: ElevatedButton.styleFrom(
+                      primary: primaryColor,
+                      onPrimary: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                     ),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 20),
-                      Text(
-                        'Find your time capsules here',
-                        style: TextStyle(
-                          color: primaryColor,
-                          fontSize: 16,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500,
+                  const SizedBox(height: 10),
+                  if (savedImages.isNotEmpty)
+                    Center(
+                      child: ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 1,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Wrap(
+                              spacing: 15.0,
+                              runSpacing: 10,
+                              children: savedImages.map((item) {
+                                return BookmarkItemCard(
+                                    imageName: item['imageName'],
+                                    date: item['date'],
+                                    image: item['image']);
+                              }).toList(),
+                            );
+                          }),
+                    )
+                  else ...{
+                    Column(
+                      children: [
+                        Image.asset(
+                          'assets/img/error.png',
+                          height: 200,
+                          width: 200,
+                          fit: BoxFit.cover,
                         ),
-                      ),
-                      SizedBox(height: 5),
-                      ElevatedButton(
-                        onPressed: () {
-                          // Add your action here
-                        },
-                        child: Text('Bookmarks'),
-                        style: ElevatedButton.styleFrom(
-                          primary: primaryColor,
-                          onPrimary: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                        const Text(
+                          "Try discovering new items and check back here.",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: "Poppins",
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 20),
-                      Column(
-                        children: [
-                          // Display the recent 5 items or a message if no items are available
-                          if (savedImages.isNotEmpty)
-                            for (var item in savedImages)
-                              ItemCard(
-                                imageName: item['imageName'],
-                                date: item['date'],
-                                image: item['image'],
-                              )
-                          else
-                            const Text(
-                              "Try discovering new items and check back here.",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontFamily: "Poppins",
-                              ),
-                            ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ],
+                      ],
+                    )
+                  },
+                ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

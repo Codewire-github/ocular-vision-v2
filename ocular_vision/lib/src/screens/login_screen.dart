@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:ocular_vision/src/screens/camera_screen_unauthorized.dart';
 import 'package:ocular_vision/src/screens/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
@@ -148,25 +149,27 @@ class LoginScreen extends StatelessWidget {
                             )),
                       ),
                       const SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                "Scan without signing in",
-                                style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    fontFamily: "Poppins",
-                                    color: Color.fromARGB(255, 2, 2, 230),
-                                    decoration: TextDecoration.underline,
-                                    decorationStyle: TextDecorationStyle.solid,
-                                    decorationColor:
-                                        Color.fromARGB(255, 2, 2, 230)),
-                              )),
-                        ],
-                      )
+                      TextButton.icon(
+                          onPressed: () {
+                            Get.to(CameraScreenUnauthoried());
+                          },
+                          icon: const Icon(
+                            Icons.center_focus_strong_rounded,
+                            size: 25,
+                            color: Color.fromARGB(255, 2, 2, 230),
+                          ),
+                          label: Text(
+                            "Scan without signing in.",
+                            style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: "Poppins",
+                                color: Color.fromARGB(255, 2, 2, 230),
+                                decoration: TextDecoration.underline,
+                                decorationStyle: TextDecorationStyle.solid,
+                                decorationColor:
+                                    Color.fromARGB(255, 2, 2, 230)),
+                          ))
                     ],
                   ),
                 ),
