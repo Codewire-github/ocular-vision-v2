@@ -41,6 +41,10 @@ class _RootScreenState extends State<RootScreen> {
     });
   }
 
+  Future refresh() async {
+    getUserData(widget.email);
+  }
+
   List<Widget> screens() => [
         ExploreScreen(
           responseData: responseData,
@@ -135,7 +139,8 @@ class _RootScreenState extends State<RootScreen> {
           bottomNavigationBar: CustomBottomNav(
             onTabChange: (index) => navigateBottomBar(index),
           ),
-          body: screens()[selectedIndex],
+          body: RefreshIndicator(
+              onRefresh: refresh, child: screens()[selectedIndex]),
         ),
       );
     }

@@ -158,8 +158,8 @@ class _InformationContainerState extends State<InformationContainer> {
                     isSeeMore = !isSeeMore;
                   });
                 },
-                child: const Text(
-                  "See more",
+                child: Text(
+                  isSeeMore ? "See less" : "See more",
                   style: TextStyle(
                       color: const Color.fromARGB(255, 62, 59, 255),
                       fontWeight: FontWeight.w600,
@@ -406,8 +406,8 @@ class _FoodInformationContainerState extends State<FoodInformationContainer> {
                           isSeeMore = !isSeeMore;
                         });
                       },
-                      child: const Text(
-                        "See more",
+                      child: Text(
+                        isSeeMore ? "See less" : "See more",
                         style: TextStyle(
                             color: const Color.fromARGB(255, 62, 59, 255),
                             fontWeight: FontWeight.w600,
@@ -924,9 +924,9 @@ class _AnimalInformationContainerState
                           isSeeMore = !isSeeMore;
                         });
                       },
-                      child: const Text(
-                        "See more",
-                        style: TextStyle(
+                      child: Text(
+                        isSeeMore ? "See less" : "See more",
+                        style: const TextStyle(
                             color: const Color.fromARGB(255, 62, 59, 255),
                             fontWeight: FontWeight.w600,
                             fontSize: 15,
