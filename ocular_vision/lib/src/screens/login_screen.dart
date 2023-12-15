@@ -148,25 +148,25 @@ class LoginScreen extends StatelessWidget {
                             )),
                       ),
                       const SizedBox(height: 10),
-                      TextButton.icon(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.center_focus_strong_rounded,
-                            size: 25,
-                            color: Color.fromARGB(255, 2, 2, 230),
-                          ),
-                          label: Text(
-                            "Continue scanning without signing in.",
-                            style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: "Poppins",
-                                color: Color.fromARGB(255, 2, 2, 230),
-                                decoration: TextDecoration.underline,
-                                decorationStyle: TextDecorationStyle.solid,
-                                decorationColor:
-                                    Color.fromARGB(255, 2, 2, 230)),
-                          ))
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                "Scan without signing in",
+                                style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: "Poppins",
+                                    color: Color.fromARGB(255, 2, 2, 230),
+                                    decoration: TextDecoration.underline,
+                                    decorationStyle: TextDecorationStyle.solid,
+                                    decorationColor:
+                                        Color.fromARGB(255, 2, 2, 230)),
+                              )),
+                        ],
+                      )
                     ],
                   ),
                 ),
