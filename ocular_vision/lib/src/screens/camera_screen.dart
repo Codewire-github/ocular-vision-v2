@@ -17,7 +17,6 @@ class CameraScreen extends StatefulWidget {
   State<CameraScreen> createState() => _CameraScreenState();
 }
 
-
 class _CameraScreenState extends State<CameraScreen> {
   CameraController? _controller;
 
@@ -30,8 +29,9 @@ class _CameraScreenState extends State<CameraScreen> {
     'Foods',
     'Technology',
     'Furniture',
-    'Flowers',
-    'Birds'
+    'Insects',
+    'Birds',
+    "All"
   ];
   int selectedOption = 2;
 
@@ -201,11 +201,12 @@ class _CameraScreenState extends State<CameraScreen> {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) => InfoScreen(
-                                  option: selectedOption,
-                                  category: options[selectedOption],
-                                  photo: _image!,
-                                  email: widget.email, // Pass the email parameter
-                                )),                                 
+                                      option: selectedOption,
+                                      category: options[selectedOption],
+                                      photo: _image!,
+                                      email: widget
+                                          .email, // Pass the email parameter
+                                    )),
                           );
                         }
                       },
@@ -227,11 +228,10 @@ class _CameraScreenState extends State<CameraScreen> {
                         context,
                         MaterialPageRoute(
                             builder: (BuildContext context) => InfoScreen(
-                                  option: selectedOption,
-                                  category: options[selectedOption],
-                                  photo: _image!,
-                                  email: widget.email
-                                )),
+                                option: selectedOption,
+                                category: options[selectedOption],
+                                photo: _image!,
+                                email: widget.email)),
                       );
                     },
                     child: Container(

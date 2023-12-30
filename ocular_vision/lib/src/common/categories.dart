@@ -9,8 +9,7 @@ class Categories {
   late Color fontColor;
   late int totalItems;
 
-  Categories(
-      this.index, this.title, this.description, this.imgPath,
+  Categories(this.index, this.title, this.description, this.imgPath,
       this.backgroundColor, this.fontColor, this.totalItems);
 }
 
@@ -22,7 +21,7 @@ List<Categories> categories = [
     "assets/img/plant.png",
     Color.fromARGB(255, 0, 100, 83),
     Colors.white,
-    4,
+    200,
   ),
   Categories(
     1,
@@ -31,7 +30,7 @@ List<Categories> categories = [
     'assets/img/animal.png',
     Color.fromARGB(255, 245, 236, 216),
     Colors.black,
-    4,
+    60,
   ),
   Categories(
     2,
@@ -40,7 +39,7 @@ List<Categories> categories = [
     'assets/img/foods.png',
     Color.fromARGB(255, 255, 79, 48),
     Colors.white,
-    4,
+    30,
   ),
   Categories(
     3,
@@ -49,7 +48,7 @@ List<Categories> categories = [
     'assets/img/laptop.png',
     Color.fromARGB(255, 0, 227, 167),
     Colors.black,
-    4,
+    20,
   ),
   Categories(
     4,
@@ -62,12 +61,12 @@ List<Categories> categories = [
   ),
   Categories(
     5,
-    'Flowers',
-    'Flowers: Nature way of expressing joy, each petal a brushstroke in the masterpiece of life.',
-    'assets/img/flower.png',
+    'Insects',
+    "Insects: Earth's buzzing architects, tiny wonders that dance through life on six legs.",
+    'assets/img/insects.png',
     Color.fromARGB(255, 230, 230, 250),
     Colors.black,
-    4,
+    20,
   ),
   Categories(
     6,
@@ -76,6 +75,6 @@ List<Categories> categories = [
     'assets/img/eagle.png',
     Color.fromARGB(255, 135, 207, 235),
     Colors.black,
-    4,
+    200,
   ),
 ];

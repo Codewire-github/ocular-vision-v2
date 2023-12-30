@@ -46,15 +46,12 @@ class ItemList extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-      constraints: const BoxConstraints(
-        minHeight: 300,
-      ),
+      height: MediaQuery.of(context).size.height * 0.5,
       decoration: BoxDecoration(
-        color: Colors.grey[100],
+        color: Color.fromARGB(255, 236, 234, 238),
         borderRadius: BorderRadius.circular(20),
       ),
       child: SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -69,6 +66,7 @@ class ItemList extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // Display the recent 5 items or a message if no items are available
                 if (items.isNotEmpty)
@@ -78,15 +76,24 @@ class ItemList extends StatelessWidget {
                       date: item['date'],
                       image: item['image'],
                     )
-                else
+                else ...{
+                  Image.asset(
+                    'assets/img/error.png',
+                    height: 200,
+                    width: 200,
+                    fit: BoxFit.cover,
+                  ),
                   Text(
                     "Try discovering new items and check back here.",
                     style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: "Poppins",
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey[700]),
+                      fontSize: 16,
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey[700],
+                    ),
+                    textAlign: TextAlign.center,
                   ),
+                }
               ],
             )
           ],

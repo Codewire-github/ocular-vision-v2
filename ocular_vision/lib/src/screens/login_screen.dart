@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:ocular_vision/src/screens/camera_screen_unauthorized.dart';
 import 'package:ocular_vision/src/screens/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
@@ -149,14 +150,16 @@ class LoginScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
                       TextButton.icon(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(CameraScreenUnauthoried());
+                          },
                           icon: const Icon(
                             Icons.center_focus_strong_rounded,
                             size: 25,
                             color: Color.fromARGB(255, 2, 2, 230),
                           ),
                           label: Text(
-                            "Continue scanning without signing in.",
+                            "Scan without signing in.",
                             style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,

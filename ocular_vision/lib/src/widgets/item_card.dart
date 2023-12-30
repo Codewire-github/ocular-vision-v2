@@ -18,22 +18,21 @@ class ItemCard extends StatelessWidget {
   final String date;
   final String image;
 
-  const ItemCard({
-    Key? key,
-    required this.imageName,
-    required this.date,
-    required this.image
-  }) : super(key: key);
+  const ItemCard(
+      {Key? key,
+      required this.imageName,
+      required this.date,
+      required this.image})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final lightBackgroundColor = generateRandomLightColor();
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 7),
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
-        color: lightBackgroundColor,
-        borderRadius: BorderRadius.circular(15),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
             color: Colors.grey[300]!, // Light shadow color
@@ -47,7 +46,7 @@ class ItemCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(15),
             child: Image.network(
               image,
               fit: BoxFit.cover,
@@ -62,12 +61,12 @@ class ItemCard extends StatelessWidget {
               Text(
                 imageName,
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 17,
                   fontWeight: FontWeight.w600,
                   fontFamily: "Poppins",
                 ),
               ),
-              const SizedBox(height: 7),
+              const SizedBox(height: 5),
               Row(
                 children: [
                   Icon(
