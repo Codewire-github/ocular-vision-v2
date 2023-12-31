@@ -157,7 +157,7 @@ class LoginScreen extends StatelessWidget {
                             color: Color.fromARGB(255, 2, 2, 230),
                           ),
                           label: Text(
-                            "Continue scanning without signing in.",
+                            "Scan without signing in.",
                             style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
