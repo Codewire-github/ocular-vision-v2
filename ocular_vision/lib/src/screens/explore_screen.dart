@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ocular_vision/src/widgets/categories_card_list.dart';
-import 'package:ocular_vision/src/screens/live_search_screen.dart';
 
 class ExploreScreen extends StatefulWidget {
   final dynamic responseData;
@@ -32,7 +31,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            Expanded(child: CategoriesCardList(responseData: widget.responseData))
+            Expanded(
+                child: CategoriesCardList(responseData: widget.responseData))
           ],
         ),
       ),

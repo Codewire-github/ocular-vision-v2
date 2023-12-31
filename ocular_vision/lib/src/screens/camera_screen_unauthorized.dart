@@ -5,9 +5,7 @@ import 'package:camera/camera.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:ocular_vision/src/screens/info_screen.dart';
 import 'package:ocular_vision/src/screens/info_screen_unauthorized.dart';
-import 'package:path_provider/path_provider.dart';
 
 class CameraScreenUnauthoried extends StatefulWidget {
   const CameraScreenUnauthoried({Key? key}) : super(key: key);
@@ -44,7 +42,7 @@ class _CameraScreenUnauthoriedState extends State<CameraScreenUnauthoried> {
   @override
   void initState() {
     super.initState();
-    // _initializeCamera();
+    _initializeCamera();
     setState(() {
       _image = null;
     });
@@ -54,14 +52,20 @@ class _CameraScreenUnauthoriedState extends State<CameraScreenUnauthoried> {
     try {
       final image = await _controller!.takePicture();
 
-      //Get the directory using path_provider plugin
-      final directory = await getTemporaryDirectory();
-      final imagePath = '${directory.path}/image.jpg';
-
-      //Save the taken picture to a temporary file
-      File(imagePath).writeAsBytesSync(File(image.path).readAsBytesSync());
-
-      await _updateImage(File(imagePath));
+      await _controller!.dispose();
+      await _updateImage(File(image.path));
+      if (_image != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => InfoScreenUnauthorized(
+                    option: selectedOption,
+                    category: options[selectedOption],
+                    photo: File(image.path),
+                  )),
+        );
+      }
+      await _initializeCamera();
     } catch (e) {
       print('Error: $e');
     }
@@ -129,15 +133,20 @@ class _CameraScreenUnauthoriedState extends State<CameraScreenUnauthoried> {
       body: Stack(children: [
         Stack(
           children: [
-            // Container(
-            //     height: double.infinity,
-            //     width: double.infinity,
-            //     margin: EdgeInsets.only(bottom: 90),
-            //     child: _controller!.value.isInitialized
-            //         ? CameraPreview(_controller!)
-            //         : const Center(
-            //             child: CircularProgressIndicator(),
-            //           )),
+            Container(
+                height: double.infinity,
+                width: double.infinity,
+                margin: EdgeInsets.only(bottom: 90),
+                child: FittedBox(
+                  fit: BoxFit.cover,
+                  child: Container(
+                      height: 100,
+                      child: _controller!.value.isInitialized
+                          ? CameraPreview(_controller!)
+                          : const Center(
+                              child: CircularProgressIndicator(),
+                            )),
+                )),
             Align(
               alignment: Alignment.topLeft,
               child: Padding(

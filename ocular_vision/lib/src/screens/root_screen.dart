@@ -12,11 +12,13 @@ class RootScreen extends StatefulWidget {
   final String userName;
   final String email;
   final String userImage;
+  final dynamic provider;
   const RootScreen({
     Key? key,
     required this.userName,
     required this.email,
     required this.userImage,
+    required this.provider,
   }) : super(key: key);
 
   @override
@@ -54,6 +56,7 @@ class _RootScreenState extends State<RootScreen> {
           userName: user.displayName!,
           userImage: user.photoURL!,
           email: user.email!,
+          provider: widget.provider,
         ),
         //AuthScreen()
       ];
@@ -147,7 +150,11 @@ class _RootScreenState extends State<RootScreen> {
   }
 
   Future<void> getUserData(String userEmail) async {
+<<<<<<< HEAD
     final String apiUrl = "http://35.172.212.23:8080/api/ocular";
+=======
+    final String apiUrl = "https://go-server-phmg.onrender.com/api/ocular";
+>>>>>>> a9546b4a63d35b289251a3738a57abea1a4b427d
     final response = await http.get(Uri.parse('$apiUrl?userName=$userEmail'));
 
     if (response.statusCode == 200) {

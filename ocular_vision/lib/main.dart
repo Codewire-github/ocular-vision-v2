@@ -13,24 +13,27 @@ void main() async {
 }
 
 // The main application widget.
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({super.key});
 
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-        create: (context) => GoogleSignInProvider(),
-        child: MaterialApp(
-          theme: ThemeData(
-            textTheme:
-                GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
-          ),
-          debugShowCheckedModeBanner: false,
-          // theme: ThemeData(
-          //     fontFamily: Theme.of(context).platform == TargetPlatform.android
-          //         ? "Poppins"
-          //         : null),
+  State<App> createState() => _AppState();
+}
 
-          home: const AuthScreen(),
-        ),
-      );
+class _AppState extends State<App> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+      ),
+      debugShowCheckedModeBanner: false,
+      // theme: ThemeData(
+      //     fontFamily: Theme.of(context).platform == TargetPlatform.android
+      //         ? "Poppins"
+      //         : null),
+
+      home: AuthScreen(),
+    );
+  }
 }

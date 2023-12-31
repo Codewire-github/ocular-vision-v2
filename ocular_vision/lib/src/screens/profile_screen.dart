@@ -1,26 +1,24 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 import 'package:ocular_vision/src/common/color_constants.dart';
-import 'package:ocular_vision/src/screens/auth_screen.dart';
-import 'package:ocular_vision/src/screens/google_sign_in.dart';
+
 import 'package:ocular_vision/src/widgets/bookmark_item_card.dart';
-import 'package:ocular_vision/src/widgets/item_card.dart';
-import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   final dynamic responseData;
   final String userName;
   final String userImage;
   final String email;
+  final dynamic provider;
 
-  ProfileScreen(
+  const ProfileScreen(
       {Key? key,
       required this.responseData,
       required this.userName,
       required this.userImage,
-      required this.email})
+      required this.email,
+      required this.provider})
       : super(key: key);
 
   @override
@@ -113,10 +111,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [
                           TextButton.icon(
                             onPressed: () {
-                              final provider =
-                                  Provider.of<GoogleSignInProvider>(context,
-                                      listen: false);
-                              provider.logout();
+                              widget.provider.logout();
 
                               // Get.offAll(() => {AuthScreen()});
                             },
