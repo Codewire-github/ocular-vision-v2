@@ -147,11 +147,7 @@ class _RootScreenState extends State<RootScreen> {
   }
 
   Future<void> getUserData(String userEmail) async {
-<<<<<<< HEAD
-    final String apiUrl = "https://go-server-phmg.onrender.com/api/ocular";
-=======
-    final String apiUrl = "http://192.168.79.1:8080/api/ocular";
->>>>>>> 111429abe3ec1d17d9ccc797700d07bb81ec8de6
+    final String apiUrl = "http://35.172.212.23:8080/api/ocular";
     final response = await http.get(Uri.parse('$apiUrl?userName=$userEmail'));
 
     if (response.statusCode == 200) {
