@@ -45,7 +45,8 @@ class TitleWidget extends StatelessWidget {
 }
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  final dynamic provider;
+  const LoginScreen({super.key, required this.provider});
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +58,7 @@ class LoginScreen extends StatelessWidget {
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.black,
           extendBody: false,
           body: Stack(
             children: [
@@ -133,9 +134,6 @@ class LoginScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20)),
                         child: TextButton.icon(
                             onPressed: () {
-                              final provider =
-                                  Provider.of<GoogleSignInProvider>(context,
-                                      listen: false);
                               provider.googleLogin();
                             },
                             icon: const FaIcon(

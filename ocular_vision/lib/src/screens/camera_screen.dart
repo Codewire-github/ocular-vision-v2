@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:ocular_vision/src/screens/info_screen.dart';
-import 'package:path_provider/path_provider.dart';
 
 class CameraScreen extends StatefulWidget {
   final String email;
@@ -44,7 +43,7 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   void initState() {
     super.initState();
-    // _initializeCamera();
+    _initializeCamera();
     setState(() {
       _image = null;
     });
@@ -54,14 +53,20 @@ class _CameraScreenState extends State<CameraScreen> {
     try {
       final image = await _controller!.takePicture();
 
-      //Get the directory using path_provider plugin
-      final directory = await getTemporaryDirectory();
-      final imagePath = '${directory.path}/image.jpg';
-
-      //Save the taken picture to a temporary file
-      File(imagePath).writeAsBytesSync(File(image.path).readAsBytesSync());
-
-      await _updateImage(File(imagePath));
+      await _controller!.dispose();
+      await _updateImage(File(image.path));
+      if (_image != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => InfoScreen(
+                  option: selectedOption,
+                  category: options[selectedOption],
+                  photo: File(image.path),
+                  email: widget.email)),
+        );
+      }
+      await _initializeCamera();
     } catch (e) {
       print('Error: $e');
     }
@@ -89,7 +94,7 @@ class _CameraScreenState extends State<CameraScreen> {
     final cameras = await availableCameras();
     final firstCamera = cameras.first;
 
-    _controller = CameraController(firstCamera, ResolutionPreset.medium);
+    _controller = CameraController(firstCamera, ResolutionPreset.high);
 
     // Next, initialize the controller. This returns a Future.
     try {
@@ -129,15 +134,20 @@ class _CameraScreenState extends State<CameraScreen> {
       body: Stack(children: [
         Stack(
           children: [
-            // Container(
-            //     height: double.infinity,
-            //     width: double.infinity,
-            //     margin: EdgeInsets.only(bottom: 90),
-            //     child: _controller!.value.isInitialized
-            //         ? CameraPreview(_controller!)
-            //         : const Center(
-            //             child: CircularProgressIndicator(),
-            //           )),
+            Container(
+                height: double.infinity,
+                width: double.infinity,
+                margin: EdgeInsets.only(bottom: 90),
+                child: FittedBox(
+                  fit: BoxFit.cover,
+                  child: Container(
+                      height: 100,
+                      child: _controller!.value.isInitialized
+                          ? CameraPreview(_controller!)
+                          : const Center(
+                              child: CircularProgressIndicator(),
+                            )),
+                )),
             Align(
               alignment: Alignment.topLeft,
               child: Padding(
@@ -224,15 +234,6 @@ class _CameraScreenState extends State<CameraScreen> {
                   child: GestureDetector(
                     onTap: () async {
                       await _takePicture();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => InfoScreen(
-                                option: selectedOption,
-                                category: options[selectedOption],
-                                photo: _image!,
-                                email: widget.email)),
-                      );
                     },
                     child: Container(
                       height: 90,

@@ -12,11 +12,13 @@ class RootScreen extends StatefulWidget {
   final String userName;
   final String email;
   final String userImage;
+  final dynamic provider;
   const RootScreen({
     Key? key,
     required this.userName,
     required this.email,
     required this.userImage,
+    required this.provider,
   }) : super(key: key);
 
   @override
@@ -54,6 +56,7 @@ class _RootScreenState extends State<RootScreen> {
           userName: user.displayName!,
           userImage: user.photoURL!,
           email: user.email!,
+          provider: widget.provider,
         ),
         //AuthScreen()
       ];
