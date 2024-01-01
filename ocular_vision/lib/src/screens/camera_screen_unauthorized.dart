@@ -93,7 +93,7 @@ class _CameraScreenUnauthoriedState extends State<CameraScreenUnauthoried> {
     final cameras = await availableCameras();
     final firstCamera = cameras.first;
 
-    _controller = CameraController(firstCamera, ResolutionPreset.medium);
+    _controller = CameraController(firstCamera, ResolutionPreset.high);
 
     // Next, initialize the controller. This returns a Future.
     try {

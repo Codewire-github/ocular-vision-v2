@@ -141,8 +141,8 @@ class _InformationContainerUnAuthorizedState
                     isSeeMore = !isSeeMore;
                   });
                 },
-                child: const Text(
-                  "See more",
+                child: Text(
+                  isSeeMore ? "See less" : "See more",
                   style: TextStyle(
                       color: const Color.fromARGB(255, 62, 59, 255),
                       fontWeight: FontWeight.w600,
@@ -371,8 +371,8 @@ class _FoodInformationUnAuthorizedContainerState
                           isSeeMore = !isSeeMore;
                         });
                       },
-                      child: const Text(
-                        "See more",
+                      child: Text(
+                        isSeeMore ? "See less" : "See more",
                         style: TextStyle(
                             color: const Color.fromARGB(255, 62, 59, 255),
                             fontWeight: FontWeight.w600,
@@ -872,8 +872,8 @@ class _AnimalInformationUnAuthorizedContainerState
                           isSeeMore = !isSeeMore;
                         });
                       },
-                      child: const Text(
-                        "See more",
+                      child: Text(
+                        isSeeMore ? "See less" : "See more",
                         style: TextStyle(
                             color: const Color.fromARGB(255, 62, 59, 255),
                             fontWeight: FontWeight.w600,

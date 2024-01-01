@@ -112,7 +112,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           TextButton.icon(
                             onPressed: () {
                               widget.provider.logout();
-
+                              setState(() {});
                               // Get.offAll(() => {AuthScreen()});
                             },
                             label: Text(
