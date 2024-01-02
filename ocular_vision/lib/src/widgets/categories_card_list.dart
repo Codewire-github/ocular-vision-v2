@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ocular_vision/src/common/categories.dart';
+import 'package:ocular_vision/src/common/color_constants.dart';
+import 'package:ocular_vision/src/screens/live_detection_screen.dart';
 import 'package:ocular_vision/src/widgets/discovery_card.dart';
 import 'dart:convert';
 
 class CategoriesCardList extends StatefulWidget {
   final dynamic responseData;
 
-  const CategoriesCardList({Key? key, required this.responseData}) : super(key: key);
+  const CategoriesCardList({Key? key, required this.responseData})
+      : super(key: key);
 
   @override
   _CategoriesCardListState createState() => _CategoriesCardListState();
@@ -38,7 +42,6 @@ class _CategoriesCardListState extends State<CategoriesCardList> {
     }
 
     return SingleChildScrollView(
-
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -80,30 +83,57 @@ class _CategoriesCardListState extends State<CategoriesCardList> {
             ),
           ),
           const SizedBox(height: 30),
-          const Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Icon(
-                Icons.explore_rounded,
-                size: 30,
+              const Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.explore_rounded,
+                    size: 30,
+                  ),
+                  SizedBox(width: 5),
+                  Text(
+                    "Discover",
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(width: 5),
-              Text(
-                "Discover",
-                style: TextStyle(
-                  fontSize: 30,
-                  fontFamily: "Poppins",
-                  fontWeight: FontWeight.bold,
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(15)),
+                child: TextButton.icon(
+                  onPressed: () {
+                    Get.to(LiveDetectionScreen());
+                  },
+                  icon: Icon(
+                    Icons.camera_rounded,
+                    size: 20,
+                    color: transPrimaryColor,
+                  ),
+                  label: Text(
+                    "Live",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
+                  ),
                 ),
-              ),
+              )
             ],
           ),
           const SizedBox(height: 25),
           if (filteredCategories.isNotEmpty)
             Column(
               children: filteredCategories.map((category) {
-                return 
-                DiscoveryCard(
+                return DiscoveryCard(
                   index: category.index,
                   title: category.title,
                   description: category.description,
@@ -113,22 +143,22 @@ class _CategoriesCardListState extends State<CategoriesCardList> {
                   totalItems: category.totalItems,
                   discoveredItems: widget.responseData == null
                       ? 0
-                      : getUniqueImageNamesCount(
-                          decodedResponseData, category.title, category.totalItems),
+                      : getUniqueImageNamesCount(decodedResponseData,
+                          category.title, category.totalItems),
                   responseData: widget.responseData,
                 );
               }).toList(),
             )
           else
             Center(
-            child: Text(
-              "No matching categories found",
-              style: TextStyle(
-                fontSize: 18,
-                fontFamily: "Poppins",
+              child: Text(
+                "No matching categories found",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontFamily: "Poppins",
+                ),
               ),
             ),
-          ),
           SizedBox(height: 50),
         ],
       ),
@@ -137,11 +167,13 @@ class _CategoriesCardListState extends State<CategoriesCardList> {
 
   void searchInputChanged(String value) {
     filteredCategories = categories
-        .where((category) => category.title.toLowerCase().contains(value.toLowerCase()))
+        .where((category) =>
+            category.title.toLowerCase().contains(value.toLowerCase()))
         .toList();
   }
 
-  int getUniqueImageNamesCount(dynamic responseData, String categoryTitle, int totalItems) {
+  int getUniqueImageNamesCount(
+      dynamic responseData, String categoryTitle, int totalItems) {
     if (responseData is! List) {
       print('Invalid responseData type: ${responseData.runtimeType}');
       return 0;

@@ -1,9 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:ocular_vision/src/common/color_constants.dart';
+import 'package:ocular_vision/src/screens/google_sign_in.dart';
+import 'package:ocular_vision/src/screens/login_screen.dart';
 
 import 'package:ocular_vision/src/widgets/bookmark_item_card.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   final dynamic responseData;
@@ -94,43 +98,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         actions: [
           TextButton.icon(
-            label: Text(""),
+            label: Text(
+              "Logout",
+              style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black),
+            ),
             icon: const FaIcon(
-              FontAwesomeIcons.bars,
+              FontAwesomeIcons.unlock,
               color: Colors.black,
             ),
-            onPressed: () {
-              showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return Container(
-                      padding: EdgeInsets.all(16),
-                      width: screenWidth,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          TextButton.icon(
-                            onPressed: () {
-                              widget.provider.logout();
-                              setState(() {});
-                              // Get.offAll(() => {AuthScreen()});
-                            },
-                            label: Text(
-                              'Logout',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: primaryColor,
-                              ),
-                            ),
-                            icon: FaIcon(
-                              FontAwesomeIcons.signOut,
-                              color: primaryColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  });
+            onPressed: () async {
+              final provider =
+                  Provider.of<GoogleSignInProvider>(context, listen: false);
+              provider.logout();
             },
           )
         ],
