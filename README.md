@@ -2,7 +2,10 @@
 
 **Ocular Vision** is driven by the fundamental goal of providing people with an easy and efficient tool to identify and interact with objects in their surroundings. With a focus on user-friendliness, the project enables quick item recognition through short, informative descriptions. Going beyond identification, the practical feature of storing traced images as a digital inventory, like bookmarks, adds convenience. The project's commitment to user engagement is demonstrated through achievement panels, encouraging exploration and interaction with different models. Ultimately, **Ocular Vision** aims to enhance daily interactions with the environment, offering a versatile and personalized tool for users to effortlessly identify, track, and engage with the objects around them.
 
-<img src="./screenshots/splash_screen.png" alt="Splash Screen" width="400"/>
+<p align="center">
+<img src="./screenshots/splash_screen.png" alt="Splash Screen" width="300"/>
+</p>
+
 
 ## Table of Contents
 
@@ -102,17 +105,32 @@
 ## Screenshots
 
 ### Home Screen
-<img src="./screenshots/home_screen.png" alt="Home Screen" width="400"/>
+
+<p align="center">
+<img src="./screenshots/home_screen.png" alt="Home Screen" width="300"/>
+</p>
 
 ### Camera Screen
-<img src="./screenshots/camera_screen.png" alt="Camera Screen" width="400"/>
+
+<p align="center">
+<img src="./screenshots/camera_screen.png" alt="Camera Screen" width="300"/>
+</p>
 
 ### Live Object Detection Screen
-<img src="./screenshots/live_object_detection_screen.png" alt="Live Object Detection Screen" width="400"/>
+
+<p align="center">
+<img src="./screenshots/live_object_detection_screen.png" alt="Live Object Detection Screen" width="300"/>
+</p>
 
 ### Info Screen for Foods
-<img src="./screenshots/info_screen_foods.png" alt="Info Screen food" width="400"/>
+
+<p align="center">
+<img src="./screenshots/info_screen_foods.png" alt="Info Screen food" width="300"/>
+</p>
 
 ### Info Screen for Animals
-<img src="./screenshots/info_screen_animals.png" alt="Info Screen animals" width="400"/>
+
+<p align="center">
+<img src="./screenshots/info_screen_animals.png" alt="Info Screen animals" width="300"/>
+</p>
 
