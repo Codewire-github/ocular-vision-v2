@@ -2,6 +2,8 @@
 
 **Ocular Vision** is driven by the fundamental goal of providing people with an easy and efficient tool to identify and interact with objects in their surroundings. With a focus on user-friendliness, the project enables quick item recognition through short, informative descriptions. Going beyond identification, the practical feature of storing traced images as a digital inventory, like bookmarks, adds convenience. The project's commitment to user engagement is demonstrated through achievement panels, encouraging exploration and interaction with different models. Ultimately, **Ocular Vision** aims to enhance daily interactions with the environment, offering a versatile and personalized tool for users to effortlessly identify, track, and engage with the objects around them.
 
+<img src="./screenshots/splash_screen.png" alt="Splash Screen" width="400"/>
+
 ## Table of Contents
 
 - [Features](#features)
@@ -13,6 +15,7 @@
   - [Teachable Machine](#teachable-machine)
   - [AWS EC2](#aws-ec2)
   - [Docker](#docker)
+- [APIs Used](#apis)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Screenshots](#screenshots)
@@ -33,12 +36,21 @@
 - **AWS EC2**
 - **Docker**
 
+## APIs Used
+1. **API ninjas**
+   API ninjas provides different varities of APIs.
+   Get your API key from [API-Ninjas](https://api-ninjas.com/) website. And update the key in ***./ocular_vision/lib/src/APIs/info_fetching.dart***
+
+3. **Pexels**
+   Pexels provides images as per our need.
+   Get your API key from [Pexels](https://www.pexels.com/api/) website. And update the key in ***./ocular_vision/lib/src/screens/info_screen.dart***
+
 ## Installation
 
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/yourusername/ocular-vision.git
+    git clone https://github.com/Codewire-github/ocular-vision.git
     cd ocular-vision
     ```
 
@@ -90,17 +102,17 @@
 ## Screenshots
 
 ### Home Screen
-![Home Screen](./screenshots/home_screen.png)
+<img src="./screenshots/home_screen.png" alt="Home Screen" width="400"/>
 
 ### Camera Screen
-![Camera Screen](./screenshots/camera_screen.png)
+<img src="./screenshots/camera_screen.png" alt="Camera Screen" width="400"/>
 
 ### Live Object Detection Screen
-![Live Object Detection Screen](./screenshots/live_object_detection_screen.png)
+<img src="./screenshots/live_object_detection_screen.png" alt="Live Object Detection Screen" width="400"/>
 
 ### Info Screen for Foods
-![Info Screen for Foods](./screenshots/info_screen_foods.png)
+<img src="./screenshots/info_screen_foods.png" alt="Info Screen food" width="400"/>
 
 ### Info Screen for Animals
-![Info Screen for Animals](./screenshots/info_screen_animals.png)
+<img src="./screenshots/info_screen_animals.png" alt="Info Screen animals" width="400"/>
 
