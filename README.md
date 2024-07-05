@@ -125,12 +125,12 @@
 ### Info Screen for Foods
 
 <p align="center">
-<img src="./screenshots/info_screen_foods.png" alt="Info Screen food" width="300"/>
+<img src="./screenshots/info_screen_animals.png" alt="Info Screen food" width="300"/>
 </p>
 
 ### Info Screen for Animals
 
 <p align="center">
-<img src="./screenshots/info_screen_animals.png" alt="Info Screen animals" width="300"/>
+<img src="./screenshots/info_screen_foods.png" alt="Info Screen animals" width="300"/>
 </p>
 
