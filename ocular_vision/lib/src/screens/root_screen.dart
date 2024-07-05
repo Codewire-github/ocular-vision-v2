@@ -88,7 +88,7 @@ class _RootScreenState extends State<RootScreen> {
                       getUserData(user.email!);
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.grey[
+                      backgroundColor: Colors.grey[
                           700], // Set the button background color to white
                     ),
                     child: Padding(

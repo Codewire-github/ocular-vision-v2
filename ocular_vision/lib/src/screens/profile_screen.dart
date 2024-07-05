@@ -212,8 +212,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     },
                     child: Text('Bookmarks'),
                     style: ElevatedButton.styleFrom(
-                      primary: primaryColor,
-                      onPrimary: Colors.white,
+                      backgroundColor: primaryColor,
+                      foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
